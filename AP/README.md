@@ -1,8 +1,10 @@
 # AP 備份 (Pull + Compress + Upload)
 
-從各台 AP 主機 (AP001~AP005) 用 rsync pull 回 `uploads/`、`logs/`、`.ssl/`，
-在 Backup Server 上壓縮成 `tar.gz`，**壓縮完立刻上傳 S3**，本地備份檔保留 3 天
-(`LOCAL_RETENTION_DAYS`，預設 3)當作快速還原用的副本，過期才清掉，不是上傳成功就立刻刪。
+從各台 AP 主機 (AP001~AP005) 用 rsync pull 回 `uploads/`、`logs/`、`.ssl/`，以及
+獨立實例的 `packages/@104ha/ehrms-max-app-api/logs/`(App server logs)與
+`packages/@104ha/open-api-server/logs/`(OpenAPI server logs)，在 Backup Server 上
+壓縮成 `tar.gz`，**壓縮完立刻上傳 S3**，本地備份檔保留 3 天(`LOCAL_RETENTION_DAYS`，
+預設 3)當作快速還原用的副本，過期才清掉，不是上傳成功就立刻刪。
 
 ## 檔案
 
@@ -61,4 +63,10 @@
   結構跟其他 AP 不太一樣，原本的版本會依序嘗試好幾種可能路徑
   (`REMOTE_ROOT_CANDIDATES`) 才 rsync 成功。目前的 `2_generate_wrappers.sh`
   還是假設單一固定路徑；如果重新產生 AP005 的 wrapper 導致 rsync 失敗，記得把
-  那段「依序嘗試路徑」的邏輯加回去。
+  那段「依序嘗試路徑」的邏輯加回去，同時也要把下面這條 app/openapi logs 的邏輯
+  合併進去(`AP005_manual_fallback_reference.sh` 這份參考檔還沒加這兩段)。
+- `uploads/`、`logs/`、`.ssl/` 之外，另外拉了兩個獨立實例的 log 目錄：
+  `packages/@104ha/ehrms-max-app-api/logs/` 跟 `packages/@104ha/open-api-server/logs/`，
+  這兩段跟原本三段一樣是「失敗就 exit 1」，假設每間公司都一定有這兩個目錄；如果之後
+  某些客戶沒有跑 app-api 或 open-api-server 這兩個獨立實例，需要另外處理成失敗時
+  不中斷整支備份(例如把 `|| { ...; exit 1; }` 改成只記 log、不 exit)。

@@ -110,6 +110,10 @@ for ID in "${IDS[@]}"; do
     rsync -az -e "$SSH_CMD" "$REMOTE_USER@$AP_HOST:$REMOTE_BASE_DIR/$FOLDER_NAME/uploads/" "$TARGET_DIR/uploads/"
     rsync -az -e "$SSH_CMD" "$REMOTE_USER@$AP_HOST:$REMOTE_BASE_DIR/$FOLDER_NAME/logs/" "$TARGET_DIR/logs/"
     rsync -az -e "$SSH_CMD" "$REMOTE_USER@$AP_HOST:$REMOTE_BASE_DIR/$FOLDER_NAME/.ssl/" "$TARGET_DIR/.ssl/"
+    # App server logs（獨立實例，cwd=packages/@104ha/ehrms-max-app-api）
+    rsync -az -e "$SSH_CMD" "$REMOTE_USER@$AP_HOST:$REMOTE_BASE_DIR/$FOLDER_NAME/packages/@104ha/ehrms-max-app-api/logs/" "$TARGET_DIR/logs_app/"
+    # OpenAPI server logs（獨立實例，cwd=packages/@104ha/open-api-server）
+    rsync -az -e "$SSH_CMD" "$REMOTE_USER@$AP_HOST:$REMOTE_BASE_DIR/$FOLDER_NAME/packages/@104ha/open-api-server/logs/" "$TARGET_DIR/logs_openapi/"
 
     if [ $? -ne 0 ]; then
         log "Error during rsync for $PURE_ID. Skipping compression/upload."
