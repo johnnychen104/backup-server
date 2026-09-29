@@ -1,0 +1,1414 @@
+{
+    "widgets": [
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 16,
+            "width": 6,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "AWS/EC2", "CPUUtilization", "InstanceId", "i-0c2c6aacfd018a4e6", { "region": "ap-northeast-1", "label": "DB001", "color": "#ff7f0e", "visible": false } ],
+                    [ "...", "i-0a46b17c81a1a2c7f", { "label": "DB002a", "region": "ap-northeast-1", "color": "#b088f5" } ],
+                    [ "...", "i-0774da0c17e5c25f5", { "color": "#00819c", "label": "DB003", "region": "ap-northeast-1", "visible": false } ],
+                    [ "...", "i-07588d9b437d89fdf", { "label": "效能測試Linux4000", "region": "ap-northeast-1", "color": "#A76F63" } ],
+                    [ "...", "i-0dee0336386b22024", { "color": "#f7db8a", "region": "ap-northeast-1", "label": "DB-backup-server" } ]
+                ],
+                "view": "timeSeries",
+                "stat": "Maximum",
+                "period": 60,
+                "stacked": false,
+                "yAxis": {
+                    "left": {
+                        "min": 0
+                    }
+                },
+                "region": "ap-northeast-1",
+                "title": "CPU utilization - DB"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 6,
+            "y": 16,
+            "width": 6,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "CWAgent", "mem_used_percent", "host", "ip-193-168-8-137", { "label": "DB001", "region": "ap-northeast-1", "color": "#ff7f0e", "visible": false } ],
+                    [ "...", "ip-193-168-8-167", { "label": "DB002a", "region": "ap-northeast-1", "color": "#b088f5" } ],
+                    [ "...", "ip-193-168-8-145", { "color": "#08aad2", "label": "DB003", "region": "ap-northeast-1", "visible": false } ],
+                    [ "...", "ip-193-168-1-10", { "region": "ap-northeast-1", "label": "效能測試Linux4000", "color": "#A76F63" } ],
+                    [ ".", "swap_used_percent", ".", "ip-193-168-8-137", { "yAxis": "right", "label": "DB001 - swap", "color": "#ffc6a4", "region": "ap-northeast-1", "visible": false } ],
+                    [ "...", "ip-193-168-8-167", { "label": "DB002a - swap", "region": "ap-northeast-1", "color": "#dfc8ff", "yAxis": "right" } ],
+                    [ "...", "ip-193-168-8-145", { "yAxis": "right", "label": "DB003 - swap", "color": "#98dcf5", "region": "ap-northeast-1", "visible": false } ],
+                    [ "...", "ip-193-168-1-10", { "label": "效能測試_swap", "region": "ap-northeast-1", "yAxis": "right" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "title": "mem_used_% - DB",
+                "period": 60,
+                "stat": "Maximum"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 12,
+            "y": 16,
+            "width": 6,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "CWAgent", "netstat_tcp_established", "host", "ip-193-168-8-167", { "label": "DB002a", "region": "ap-northeast-1", "color": "#b088f5" } ],
+                    [ "...", "ip-193-168-1-10", { "label": "4000", "color": "#A76F63" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "title": "netstat_tcp_established - DB",
+                "period": 60,
+                "stat": "Average"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 32,
+            "width": 8,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/cotek-22092003-max-tg/5193d38f8de3ca5e", "LoadBalancer", "app/cotek-22092003-ALB/33b744e07d6965fa", { "label": "cotek-22092003", "region": "ap-northeast-1", "color": "#08aad2" } ],
+                    [ "...", "targetgroup/farglorydome-27946233-max-tg/42de1b7df8b30236", ".", "app/farglorydome-27946233-ALB/131da1138e69887c", { "label": "farglorydome-27946233", "region": "ap-northeast-1", "color": "#f89256" } ],
+                    [ "...", "targetgroup/farglorygroup-86687839-max-tg/3eafea72b0fe42ae", ".", "app/farglorygroup-86687839-ALB/3e1f43cb9a0746d9", { "label": "farglorygroup-86687839", "color": "#69ae34", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/synergy-85092803-max-tg/b0c08208c7e2c258", ".", "app/synergy-85092803-ALB/3c757bf3e9a710b7", { "region": "ap-northeast-1", "label": "synergy-85092803", "color": "#fe6e73" } ],
+                    [ "...", "targetgroup/digitimes-16300799-max-tg/98fd8a2eafbc48c4", ".", "app/digitimes-16300799-alb/64013254d1c27ad6", { "label": "digitimes-16300799", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/artisticdc-90451259-max-tg/468692afb358df16", ".", "app/artisticdc-90451259-ALB/a4ebec1e3d9e6756", { "label": "artisticdc-90451259", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/matatakitoyo-86673954-max-tg/a32df2c4455d4b1f", ".", "app/matatakitoyo-86673954-ALB/779982a668e8cb6d", { "label": "matatakitoyo-86673954", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/brightesttech-54974676-max-tg/a2442c4437c0aaeb", ".", "app/brightesttech-54974676-ALB/91d9acfaacd879dd", { "label": "brightesttech-54974676", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/bailichu-16989733-max-tg/a03d3ed71b18803b", ".", "app/bailichu-16989733-ALB/df144a5893e5fbae", { "label": "bailichu-16989733", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/jesper-83561007-max-tg/46fcd886d8924d49", ".", "app/jesper-83561007-ALB/16d18901e1e53cf2", { "label": "jesper-83561007", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/cwco-35882520-max-tg/a533bb3ccce80906", ".", "app/cwco-35882520-ALB/aa6289300dbb465c", { "label": "cwco-35882520", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/dengyi-16218320-max-tg/406edcc271075652", ".", "app/dengyi-16218320-ALB/d7ee28f2008a8f8b", { "label": "dengyi-16218320", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/aws001-max-tg/13e71d1edd387404", ".", "app/12345678-ALB/471f2edbf4696819", { "region": "ap-northeast-1", "label": "aws001" } ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": true,
+                "setPeriodToTimeRange": false,
+                "title": "AP001-HealthyHostCount-Max",
+                "trend": true
+            }
+        },
+        {
+            "type": "metric",
+            "x": 8,
+            "y": 32,
+            "width": 8,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/cotek-22092003-portal-tg/6f0b494e92fbc774", "LoadBalancer", "app/cotek-22092003-ALB/33b744e07d6965fa", { "label": "cotek-22092003", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/farglorydome-27946233-portal-tg/de860f0ee0662ae6", ".", "app/farglorydome-27946233-ALB/131da1138e69887c", { "label": "farglorydome-27946233", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/farglorygroup-86687839-portal-tg/e4e9c9ae4e68b515", ".", "app/farglorygroup-86687839-ALB/3e1f43cb9a0746d9", { "label": "farglorygroup-86687839", "region": "ap-northeast-1", "color": "#69ae34" } ],
+                    [ "...", "targetgroup/synergy-85092803-portal-tg/5174a73780bf47f1", ".", "app/synergy-85092803-ALB/3c757bf3e9a710b7", { "region": "ap-northeast-1", "label": "synergy-85092803", "color": "#fe6e73" } ],
+                    [ "...", "targetgroup/digitimes-16300799-portal-tg/4a6b7f8de8ff4130", ".", "app/digitimes-16300799-alb/64013254d1c27ad6", { "label": "digitimes-16300799", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/artisticdc-90451259-portal-tg/0ad40dd50d275390", ".", "app/artisticdc-90451259-ALB/a4ebec1e3d9e6756", { "label": "artisticdc-90451259", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/matatakitoyo-86673954-portal-tg/0af9d87310af391a", ".", "app/matatakitoyo-86673954-ALB/779982a668e8cb6d", { "label": "matatakitoyo-86673954", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/brightesttech-54974676-portal-tg/7cc931b005bafab9", ".", "app/brightesttech-54974676-ALB/91d9acfaacd879dd", { "label": "brightesttech-54974676", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/bailichu-16989733-portal-tg/495f6059efe72c39", ".", "app/bailichu-16989733-ALB/df144a5893e5fbae", { "label": "bailichu-16989733", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/jesper-83561007-portal-tg/8e1adb8e53f3919d", ".", "app/jesper-83561007-ALB/16d18901e1e53cf2", { "region": "ap-northeast-1", "label": "jesper-83561007" } ],
+                    [ "...", "targetgroup/cwco-35882520-portal-tg/eb11fbc36bbc1082", ".", "app/cwco-35882520-ALB/aa6289300dbb465c", { "label": "cwco-35882520", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/dengyi-16218320-portal-tg/d42f9b349a93067a", ".", "app/dengyi-16218320-ALB/d7ee28f2008a8f8b", { "label": "dengyi-16218320", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/aws001-portal-tg/df9cdcdb44aaf397", ".", "app/12345678-ALB/471f2edbf4696819", { "label": "aws001", "region": "ap-northeast-1" } ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": false,
+                "setPeriodToTimeRange": false,
+                "title": "AP001-HealthyHostCount-Portal",
+                "trend": true
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 23,
+            "width": 5,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "AWS/EC2", "CPUUtilization", "InstanceId", "i-04963e5a52e30f0cc", { "label": "AP001a", "color": "#69ae34", "region": "ap-northeast-1" } ],
+                    [ "...", "i-04d27283a9685c06e", { "color": "#fe6e73", "label": "AP002", "region": "ap-northeast-1" } ],
+                    [ "...", "i-0658b3784fee8fa52", { "label": "AP003a", "color": "#00819c", "region": "ap-northeast-1" } ],
+                    [ "...", "i-013976ff5a02ebeea", { "label": "AP004", "color": "#A76F63", "region": "ap-northeast-1" } ],
+                    [ "...", "i-0fb042f8cfd106d06", { "region": "ap-northeast-1", "label": "AP-backup-server", "color": "#dfb52c" } ]
+                ],
+                "view": "timeSeries",
+                "stat": "Maximum",
+                "period": 60,
+                "stacked": false,
+                "yAxis": {
+                    "left": {
+                        "min": 0
+                    }
+                },
+                "region": "ap-northeast-1",
+                "title": "CPU utilization - AP"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 5,
+            "y": 23,
+            "width": 5,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "CWAgent", "mem_used_percent", "host", "ip-193-168-8-31", { "region": "ap-northeast-1", "label": "AP001a", "color": "#69ae34" } ],
+                    [ ".", "swap_used_percent", ".", ".", { "color": "#b2df8d", "label": "AP001a - swap", "region": "ap-northeast-1", "yAxis": "right" } ],
+                    [ ".", "mem_used_percent", ".", "ip-193-168-8-26", { "region": "ap-northeast-1", "color": "#fe6e73", "label": "AP002" } ],
+                    [ ".", "swap_used_percent", ".", ".", { "label": "AP002 - swap", "color": "#ffc4c0", "yAxis": "right", "region": "ap-northeast-1" } ],
+                    [ ".", "mem_used_percent", ".", "ip-193-168-8-33", { "color": "#00819c", "label": "AP003a", "region": "ap-northeast-1", "yAxis": "left" } ],
+                    [ ".", "swap_used_percent", ".", ".", { "color": "#caedfc", "label": "AP003a - swap", "region": "ap-northeast-1", "yAxis": "right" } ],
+                    [ ".", "mem_used_percent", ".", "ip-193-168-8-34", { "label": "AP004", "color": "#A76F63", "region": "ap-northeast-1" } ],
+                    [ ".", "swap_used_percent", ".", ".", { "label": "AP004 - swap", "color": "#ffede2", "yAxis": "right", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "title": "mem_used_% - AP",
+                "period": 60,
+                "stat": "Maximum"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 15,
+            "y": 23,
+            "width": 4,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "CWAgent", "netstat_tcp_established", "host", "ip-193-168-8-31", { "color": "#b2df8d", "region": "ap-northeast-1", "label": "AP001a" } ],
+                    [ "...", "ip-193-168-8-26", { "label": "AP002", "color": "#fe6e73", "region": "ap-northeast-1" } ],
+                    [ "...", "ip-193-168-8-54", { "label": "AP003", "color": "#dfb52c", "region": "ap-northeast-1", "visible": false } ],
+                    [ "...", "ip-193-168-8-33", { "label": "AP003a", "color": "#00819c" } ],
+                    [ "...", "ip-193-168-8-34", { "color": "#A76F63", "label": "AP004", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "title": "netstat_tcp_established - AP",
+                "period": 60,
+                "stat": "Average"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 66,
+            "width": 12,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/S3", "BucketSizeBytes", "StorageType", "StandardStorage", "BucketName", "hrmax-backup-singapore", { "region": "ap-southeast-1", "color": "#bcbd22" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-southeast-1",
+                "period": 86400,
+                "stat": "Average",
+                "title": "BucketSizeBytes",
+                "start": "-PT168H",
+                "end": "P0D"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 16,
+            "y": 32,
+            "width": 8,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/cotek-22092003-App-tg/670c6e9d2e12120a", "LoadBalancer", "app/cotek-22092003-ALB/33b744e07d6965fa", { "region": "ap-northeast-1", "label": "cotek-22092003" } ],
+                    [ "...", "targetgroup/farglorydome-27946233-app-tg/ee37b7ee6ba4bab9", ".", "app/farglorydome-27946233-ALB/131da1138e69887c", { "label": "farglorydome-27946233", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/farglorygroup-86687839-app-tg/448447b3588d5bf0", ".", "app/farglorygroup-86687839-ALB/3e1f43cb9a0746d9", { "label": "farglorygroup-86687839", "region": "ap-northeast-1", "color": "#69ae34" } ],
+                    [ "...", "targetgroup/synergy-85092803-app-tg/55298925c74cadff", ".", "app/synergy-85092803-ALB/3c757bf3e9a710b7", { "region": "ap-northeast-1", "label": "synergy-85092803", "color": "#fe6e73" } ],
+                    [ "...", "targetgroup/digitimes-16300799-app-tg/5daeb6c3dd421a7d", ".", "app/digitimes-16300799-alb/64013254d1c27ad6", { "label": "digitimes-16300799", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/artisticdc-90451259-app-tg/b107bf2d3d0b88e5", ".", "app/artisticdc-90451259-ALB/a4ebec1e3d9e6756", { "label": "artisticdc-90451259", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/matatakitoyo-86673954-app-tg/2e810c33eb0a0356", ".", "app/matatakitoyo-86673954-ALB/779982a668e8cb6d", { "label": "matatakitoyo-86673954", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/brightesttech-54974676-app-tg/7082ce9beca2613a", ".", "app/brightesttech-54974676-ALB/91d9acfaacd879dd", { "region": "ap-northeast-1", "label": "brightesttech-54974676" } ],
+                    [ "...", "targetgroup/bailichu-16989733-app-tg/65acbc372502b7ae", ".", "app/bailichu-16989733-ALB/df144a5893e5fbae", { "label": "bailichu-16989733", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/jesper-83561007-app-tg/b553ed916b1c4918", ".", "app/jesper-83561007-ALB/16d18901e1e53cf2", { "label": "jesper-83561007", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/cwco-35882520-app-tg/7780386a112d7da7", ".", "app/cwco-35882520-ALB/aa6289300dbb465c", { "label": "cwco-35882520", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/dengyi-16218320-app-tg/8518f197826adf08", ".", "app/dengyi-16218320-ALB/d7ee28f2008a8f8b", { "region": "ap-northeast-1", "label": "dengyi-16218320" } ],
+                    [ "...", "targetgroup/aws001-app-tg/3aead9faec40b7ba", ".", "app/12345678-ALB/471f2edbf4696819", { "label": "aws001", "region": "ap-northeast-1" } ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": false,
+                "setPeriodToTimeRange": false,
+                "title": "AP001-HealthyHostCount-APP",
+                "trend": true
+            }
+        },
+        {
+            "type": "metric",
+            "x": 12,
+            "y": 66,
+            "width": 12,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/WAFV2", "BlockedRequests", "Rule", "blockIP", "WebACL", "hrmax-cloudfront-acl-1", { "region": "us-east-1", "yAxis": "right" } ],
+                    [ "...", "AWS-AWSManagedRulesAdminProtectionRuleSet", ".", ".", { "region": "us-east-1" } ],
+                    [ "...", "AWS-AWSManagedRulesCommonRuleSet", ".", ".", { "region": "us-east-1" } ],
+                    [ "...", "AWS-AWSManagedRulesKnownBadInputsRuleSet", ".", ".", { "region": "us-east-1" } ],
+                    [ "...", "WebACL", "hrmax-cloudfront-dev-acl", "Rule", "ip-only", { "region": "us-east-1", "yAxis": "right" } ]
+                ],
+                "stat": "Maximum",
+                "view": "timeSeries",
+                "stacked": false,
+                "period": 3600,
+                "region": "us-east-1",
+                "title": "WAF-ACL-rules",
+                "yAxis": {
+                    "left": {
+                        "showUnits": false
+                    },
+                    "right": {
+                        "showUnits": false
+                    }
+                },
+                "start": "-PT24H",
+                "end": "P0D"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 6,
+            "y": 99,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/EBS", "VolumeWriteOps", "VolumeId", "vol-06a959802834efbf3", { "color": "#b088f5", "label": "DB002a", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "Average",
+                "period": 60,
+                "title": "Volume-WriteOps - DB"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 99,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/EBS", "VolumeReadOps", "VolumeId", "vol-06a959802834efbf3", { "color": "#b088f5", "label": "DB002a", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "Average",
+                "period": 60,
+                "title": "Volume-ReadOps - DB"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 105,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/EBS", "VolumeReadOps", "VolumeId", "vol-0569e3ddde3b3734a", { "label": "AP001a", "color": "#b2df8d", "region": "ap-northeast-1" } ],
+                    [ "AWS/EC2", "EBSReadOps", "InstanceId", "i-04d27283a9685c06e", { "color": "#fe6e73", "region": "ap-northeast-1", "label": "AP002" } ],
+                    [ "AWS/EBS", "VolumeReadOps", "VolumeId", "vol-0e69146c0a1b92ab7", { "color": "#00819c", "label": "AP003a" } ],
+                    [ "...", "vol-06275ff52d2d36ce9", { "label": "AP004", "color": "#A76F63", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "title": "VolumeReadOps",
+                "stat": "Average",
+                "period": 60
+            }
+        },
+        {
+            "type": "metric",
+            "x": 6,
+            "y": 105,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/EBS", "VolumeWriteOps", "VolumeId", "vol-0569e3ddde3b3734a", { "label": "AP001a", "color": "#b2df8d", "region": "ap-northeast-1" } ],
+                    [ "...", "vol-09eff7f0235e59b59", { "region": "ap-northeast-1", "label": "AP002", "color": "#fe6e73" } ],
+                    [ "...", "vol-0e69146c0a1b92ab7", { "color": "#00819c", "label": "AP003a" } ],
+                    [ "...", "vol-06275ff52d2d36ce9", { "color": "#A76F63", "region": "ap-northeast-1", "label": "AP004" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "title": "VolumeWriteOps",
+                "stat": "Average",
+                "period": 60
+            }
+        },
+        {
+            "type": "metric",
+            "x": 12,
+            "y": 99,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "CWAgent", "diskio_io_time", "host", "ip-193-168-8-167", "name", "nvme0n1", { "color": "#b088f5", "label": "DB002a", "region": "ap-northeast-1" } ],
+                    [ "...", "ip-193-168-1-10", ".", "nvme0n1p1", { "region": "ap-northeast-1", "visible": false } ],
+                    [ "...", "nvme0n1", { "region": "ap-northeast-1" } ],
+                    [ "AWS/EBS", "VolumeIOPSExceededCheck", "VolumeId", "vol-0bea2d82591e83a18", "InstanceId", "i-07588d9b437d89fdf", { "yAxis": "right", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "title": " diskio_io_time -DB",
+                "stat": "Average",
+                "period": 60
+            }
+        },
+        {
+            "type": "metric",
+            "x": 18,
+            "y": 105,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "CWAgent", "diskio_io_time", "host", "ip-193-168-8-31", "name", "nvme0n1", { "color": "#b2df8d", "region": "ap-northeast-1", "label": "AP001a" } ],
+                    [ "...", "ip-193-168-8-26", ".", ".", { "label": "AP002", "color": "#fe6e73", "region": "ap-northeast-1" } ],
+                    [ "...", "ip-193-168-8-33", ".", ".", { "label": "AP003a", "color": "#00819c", "region": "ap-northeast-1" } ],
+                    [ "...", "ip-193-168-8-34", ".", ".", { "color": "#A76F63", "region": "ap-northeast-1", "label": "AP004" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "Average",
+                "period": 60,
+                "title": "diskio_io_time"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 72,
+            "width": 8,
+            "height": 9,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/cotek-22092003-portal-tg/6f0b494e92fbc774", { "id": "m6", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/farglorydome-27946233-portal-tg/de860f0ee0662ae6", { "id": "m10", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/farglorygroup-86687839-portal-tg/e4e9c9ae4e68b515", { "id": "m11", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/synergy-85092803-portal-tg/5174a73780bf47f1", { "id": "m14", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/digitimes-16300799-portal-tg/4a6b7f8de8ff4130", { "id": "m9", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/artisticdc-90451259-portal-tg/0ad40dd50d275390", { "id": "m3", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/matatakitoyo-86673954-portal-tg/0af9d87310af391a", { "id": "m13", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/brightesttech-54974676-portal-tg/7cc931b005bafab9", { "id": "m5", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/bailichu-16989733-portal-tg/495f6059efe72c39", { "id": "m4", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/jesper-83561007-portal-tg/8e1adb8e53f3919d", { "id": "m12", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/cwco-35882520-portal-tg/eb11fbc36bbc1082", { "id": "m7", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/ankang-91485806-portal-tg/2bbc8618a2250cdb", { "id": "m2", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/dengyi-16218320-portal-tg/d42f9b349a93067a", { "id": "m8", "region": "ap-northeast-1" } ],
+                    [ { "expression": "SUM(METRICS())", "label": "SUM", "id": "e1", "color": "#E0E0E0", "region": "ap-northeast-1", "stat": "SampleCount", "visible": false, "period": 60 } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "SampleCount",
+                "period": 60,
+                "title": "AP001-RequestCount-Portal"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 8,
+            "y": 72,
+            "width": 8,
+            "height": 9,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/cotek-22092003-max-tg/5193d38f8de3ca5e", { "id": "m27", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/farglorydome-27946233-max-tg/42de1b7df8b30236", { "id": "m2", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/farglorygroup-86687839-max-tg/3eafea72b0fe42ae", { "id": "m3", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/synergy-85092803-max-tg/b0c08208c7e2c258", { "id": "m4", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/digitimes-16300799-max-tg/98fd8a2eafbc48c4", { "id": "m5", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/artisticdc-90451259-max-tg/468692afb358df16", { "id": "m6", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/matatakitoyo-86673954-max-tg/a32df2c4455d4b1f", { "id": "m10", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/brightesttech-54974676-max-tg/a2442c4437c0aaeb", { "id": "m7", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/bailichu-16989733-max-tg/a03d3ed71b18803b", { "id": "m8", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/jesper-83561007-max-tg/46fcd886d8924d49", { "id": "m9", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/cwco-35882520-max-tg/a533bb3ccce80906", { "id": "m11", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/ankang-91485806-max-tg/2b23c4214c39488c", { "id": "m12", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/dengyi-16218320-max-tg/406edcc271075652", { "id": "m26", "region": "ap-northeast-1" } ],
+                    [ { "expression": "SUM(METRICS())", "label": "SUM", "id": "e1", "color": "#E0E0E0", "region": "ap-northeast-1", "stat": "SampleCount", "visible": false, "period": 60 } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "SampleCount",
+                "period": 60,
+                "title": "AP001-RequestCount-Max"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 16,
+            "y": 72,
+            "width": 8,
+            "height": 9,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/cotek-22092003-App-tg/670c6e9d2e12120a", { "id": "m2", "label": "cotek-22092003-App-tg/670c6e9d2e12120a", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/farglorydome-27946233-app-tg/ee37b7ee6ba4bab9", { "id": "m3", "label": "farglorydome-27946233-app-tg/ee37b7ee6ba4bab9", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/farglorygroup-86687839-app-tg/448447b3588d5bf0", { "id": "m4", "label": "farglorygroup-86687839-app-tg/448447b3588d5bf0", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/synergy-85092803-app-tg/55298925c74cadff", { "id": "m5", "label": "synergy-85092803-app-tg/55298925c74cadff", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/digitimes-16300799-app-tg/5daeb6c3dd421a7d", { "id": "m6", "label": "digitimes-16300799-app-tg/5daeb6c3dd421a7d", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/artisticdc-90451259-app-tg/b107bf2d3d0b88e5", { "id": "m7", "label": "artisticdc-90451259-app-tg/b107bf2d3d0b88e5", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/matatakitoyo-86673954-app-tg/2e810c33eb0a0356", { "id": "m8", "label": "matatakitoyo-86673954-app-tg/2e810c33eb0a0356", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/brightesttech-54974676-app-tg/7082ce9beca2613a", { "id": "m10", "label": "brightesttech-54974676-app-tg/7082ce9beca2613a", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/bailichu-16989733-app-tg/65acbc372502b7ae", { "id": "m9", "label": "bailichu-16989733-app-tg/65acbc372502b7ae", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/jesper-83561007-app-tg/b553ed916b1c4918", { "id": "m11", "label": "jesper-83561007-app-tg/b553ed916b1c4918", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/cwco-35882520-app-tg/7780386a112d7da7", { "id": "m14", "label": "cwco-35882520-app-tg/7780386a112d7da7", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/ankang-91485806-app-tg/318d152ba15664c2", { "id": "m12", "label": "ankang-91485806-app-tg/318d152ba15664c2", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/dengyi-16218320-app-tg/8518f197826adf08", { "id": "m13", "region": "ap-northeast-1", "label": "dengyi-16218320" } ],
+                    [ { "expression": "SUM(METRICS())", "label": "SUM", "id": "e1", "color": "#E0E0E0", "region": "ap-northeast-1", "visible": false, "period": 60 } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "SampleCount",
+                "period": 60,
+                "title": "AP001-RequestCount-App"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 18,
+            "y": 99,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/SES", "Bounce", { "id": "m1", "region": "ap-northeast-1" } ],
+                    [ ".", "Send", { "id": "m2", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "Sum",
+                "period": 60,
+                "title": "SES - Bounce & Send"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 41,
+            "width": 8,
+            "height": 5,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/celavitaipei-82798594-max-tg/75823a7333a73ed3", "LoadBalancer", "app/celavitaipei-82798594-ALB/675d2bd5eddc0a29", { "label": "celavitaipei-82798594", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/given-23487095-max-tg/28695699edc1ab53", ".", "app/given-23487095-ALB/97d11bf4b5e3d80b", { "label": "given-23487095", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fuburg-30851864-max-tg/116a3ab160b53f25", ".", "app/fuburg-30851864-ALB/12a6e2acc7a1a2a9", { "label": "fuburg-30851864", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chchr-22391179-max-tg/9cffe0545857ccd0", ".", "app/chchr-22391179-ALB/6e93a494b2706478", { "label": "chchr-22391179", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/niching-84355650-max-tg/c38c54abda1b1bf0", ".", "app/niching-84355650-ALB/f9de0bf9a9c66229", { "label": "niching-84355650", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/yungloong-11214205-max-tg/4c31929c1efa2975", ".", "app/yungloong-11214205-ALB/bb05f8c0c928721f", { "label": "yungloong-11214205", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/golgroup-42847916-max-tg/b7fd9637b7ac8682", ".", "app/golgroup-42847916-ALB/96ae96cff58d91cb", { "label": "golgroup-42847916", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/greenfiltec-54795527-max-tg/a6fb65c7b9ef3639", ".", "app/greenfiltec-54795527-ALB/febd2422fc7a6b3d", { "region": "ap-northeast-1", "label": "greenfiltec-54795527" } ],
+                    [ "...", "targetgroup/yikung-85856511-max-tg/c16c129c6a68b09a", ".", "app/yikung-85856511-ALB/dce52dfb5d03a498", { "label": "yikung-85856511", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/palsys-83244930-max-tg/6d48479b0aeaeaaa", ".", "app/palsys-83244930-ALB/5982624ff3bdf6ae", { "label": "palsys-83244930", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/sstandc-28691321-max-tg/6b1c3a25491b99b7", ".", "app/sstandc-28691321-ALB/ef76ddc3d6134304", { "label": "sstandc-28691321", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/alpsgiken-16831332-max-tg/778085142a5812a7", ".", "app/alpsgiken-16831332-ALB/4837f3194b7d3463", { "label": "alpsgiken-16831332", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chenyancg-16822994-max-tg/9ad334699210100a", ".", "app/chenyancg-16822994-ALB/b8acde661a10fb44", { "label": "chenyancg-16822994", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fortune-52356446-max-tg/d311cd4f8746cfef", ".", "app/fortune-52356446-ALB/bf0d346b3f5d862b", { "label": "fortune-52356446", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/colliers-23984185-max-tg/afcf3722151faf1b", ".", "app/colliers-23984185-ALB/3e9d573487238a6e", { "label": "colliers-23984185", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/newlife-25899142-max-tg/db95bea889e7d63d", ".", "app/newlife-25899142-ALB/445ec03c1491cb03", { "label": "newlife-25899142", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/invni-22859168-max-tg/c9668b000869b284", ".", "app/invni-22859168-ALB/8c2346b710ad8c3c", { "label": "invni-22859168", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/grobesttaiwan-83395697-max-tg/2c5ee1fd76c536f1", ".", "app/grobesttaiwan-83395697-ALB/fd91213228226df2", { "label": "grobesttaiwan-83395697", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/cigpower-81481909-max-tg/9bcf263efbf46cb7", ".", "app/cigpower-81481909-ALB/75fa732a39313b61", { "label": "cigpower-81481909", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-lianglaw-48861436-max/ffb14738f24ac1a9", ".", "app/alb-lianglaw-48861436/672e9bda106f9eec", { "label": "liang-law-48861436", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-shihzhen-00173245-max/4653b1ee68cbddc1", ".", "app/alb-shihzhen-00173245/1f0f36e7cc779ae5", { "label": "shihzhen-00173245", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/aws002-max-tg/992da59322a57695", ".", "app/12345678-ALB/471f2edbf4696819", { "label": "aws002", "region": "ap-northeast-1" } ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": true,
+                "setPeriodToTimeRange": false,
+                "title": "AP002-HealthyHostCount-Max",
+                "trend": true
+            }
+        },
+        {
+            "type": "metric",
+            "x": 8,
+            "y": 41,
+            "width": 8,
+            "height": 5,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/celavitaipei-82798594-portal-tg/6d1674a5eb7dca9c", "LoadBalancer", "app/celavitaipei-82798594-ALB/675d2bd5eddc0a29", { "label": "celavitaipei-82798594", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/given-23487095-portal-tg/ca30b1669ad3b0c4", ".", "app/given-23487095-ALB/97d11bf4b5e3d80b", { "label": "given-23487095", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fuburg-30851864-portal-tg/c33ebb54f422264e", ".", "app/fuburg-30851864-ALB/12a6e2acc7a1a2a9", { "label": "fuburg-30851864", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chchr-22391179-portal-tg/03220711fa370f81", ".", "app/chchr-22391179-ALB/6e93a494b2706478", { "label": "chchr-22391179", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/niching-84355650-portal-tg/2c822d9c7c6709a0", ".", "app/niching-84355650-ALB/f9de0bf9a9c66229", { "label": "niching-84355650", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/yungloong-11214205-portal-tg/4a244627931043df", ".", "app/yungloong-11214205-ALB/bb05f8c0c928721f", { "label": "yungloong-11214205", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/golgroup-42847916-portal-tg/7201f124995635e5", ".", "app/golgroup-42847916-ALB/96ae96cff58d91cb", { "label": "golgroup-42847916", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/greenfiltec-54795527-portal-tg/7a97203aa0bb45c2", ".", "app/greenfiltec-54795527-ALB/febd2422fc7a6b3d", { "label": "greenfiltec-54795527", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/yikung-85856511-portal-tg/13d02fa825e352ad", ".", "app/yikung-85856511-ALB/dce52dfb5d03a498", { "label": "yikung-85856511", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/palsys-83244930-portal-tg/7fd1d1042ddaa33d", ".", "app/palsys-83244930-ALB/5982624ff3bdf6ae", { "label": "palsys-83244930", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/sstandc-28691321-portal-tg/75125ac989561db9", ".", "app/sstandc-28691321-ALB/ef76ddc3d6134304", { "label": "sstandc-28691321", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/alpsgiken-16831332-portal-tg/00be8ef6905afc87", ".", "app/alpsgiken-16831332-ALB/4837f3194b7d3463", { "label": "alpsgiken-16831332", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chenyancg-16822994-portal-tg/c74d88331fe83d91", ".", "app/chenyancg-16822994-ALB/b8acde661a10fb44", { "label": "chenyancg-16822994", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fortune-52356446-portal-tg/d1820c123e16c5e7", ".", "app/fortune-52356446-ALB/bf0d346b3f5d862b", { "label": "fortune-52356446", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/colliers-23984185-portal-tg/3b63c773f364be4c", ".", "app/colliers-23984185-ALB/3e9d573487238a6e", { "label": "colliers-23984185", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/newlife-25899142-portal-tg/30871db943c969de", ".", "app/newlife-25899142-ALB/445ec03c1491cb03", { "label": "newlife-25899142", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/invni-22859168-portal-tg/6d0545a269469ef2", ".", "app/invni-22859168-ALB/8c2346b710ad8c3c", { "label": "invni-22859168", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/grobesttaiwan-83395697-portal-tg/cc4eedf83febaef2", ".", "app/grobesttaiwan-83395697-ALB/fd91213228226df2", { "label": "grobesttaiwan-83395697", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/cigpower-81481909-portal-tg/10adfdb712443631", ".", "app/cigpower-81481909-ALB/75fa732a39313b61", { "label": "cigpower-81481909", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-lianglaw-48861436-portal/263a593ba0074cfa", ".", "app/alb-lianglaw-48861436/672e9bda106f9eec", { "label": "liang-law-48861436", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-shihzhen-00173245-max/4653b1ee68cbddc1", ".", "app/alb-shihzhen-00173245/1f0f36e7cc779ae5", { "label": "shihzhen-00173245", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/aws002-portal-tg/e6cbeb2778d493c7", ".", "app/12345678-ALB/471f2edbf4696819", { "label": "aws002", "region": "ap-northeast-1" } ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": false,
+                "setPeriodToTimeRange": false,
+                "title": "AP002-HealthyHostCount-Portal",
+                "trend": true
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 81,
+            "width": 8,
+            "height": 9,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/celavitaipei-82798594-portal-tg/6d1674a5eb7dca9c", { "id": "m3", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/given-23487095-portal-tg/ca30b1669ad3b0c4", { "id": "m4", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fuburg-30851864-portal-tg/c33ebb54f422264e", { "id": "m2", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chchr-22391179-portal-tg/03220711fa370f81", { "id": "m1", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/niching-84355650-portal-tg/2c822d9c7c6709a0", { "id": "m5", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/yungloong-11214205-portal-tg/4a244627931043df", { "id": "m6", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/golgroup-42847916-portal-tg/7201f124995635e5", { "id": "m7", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/greenfiltec-54795527-portal-tg/7a97203aa0bb45c2", { "id": "m9", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/yikung-85856511-portal-tg/13d02fa825e352ad", { "id": "m12", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/palsys-83244930-portal-tg/7fd1d1042ddaa33d", { "id": "m8", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/sstandc-28691321-portal-tg/75125ac989561db9", { "id": "m11", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/eoihospitality-95451145-porta-tg/44b4f6566a69c798", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/alpsgiken-16831332-portal-tg/00be8ef6905afc87", { "id": "m19", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chenyancg-16822994-portal-tg/c74d88331fe83d91", { "id": "m15", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fortune-52356446-portal-tg/d1820c123e16c5e7", { "id": "m16", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/colliers-23984185-portal-tg/3b63c773f364be4c", { "id": "m14", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/newlife-25899142-portal-tg/30871db943c969de", { "id": "m18", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/invni-22859168-portal-tg/6d0545a269469ef2", { "id": "m17", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/grobesttaiwan-83395697-portal-tg/cc4eedf83febaef2", { "id": "m13", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/cigpower-81481909-portal-tg/10adfdb712443631", { "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "SampleCount",
+                "period": 60,
+                "title": "AP002-RequestCount-Portal"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 8,
+            "y": 81,
+            "width": 8,
+            "height": 9,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/celavitaipei-82798594-max-tg/75823a7333a73ed3", { "id": "m1", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/given-23487095-max-tg/28695699edc1ab53", { "id": "m2", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fuburg-30851864-max-tg/116a3ab160b53f25", { "id": "m3", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chchr-22391179-max-tg/9cffe0545857ccd0", { "id": "m4", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/niching-84355650-max-tg/c38c54abda1b1bf0", { "id": "m5", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/yungloong-11214205-max-tg/4c31929c1efa2975", { "id": "m6", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/golgroup-42847916-max-tg/b7fd9637b7ac8682", { "id": "m7", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/greenfiltec-54795527-max-tg/a6fb65c7b9ef3639", { "id": "m9", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/yikung-85856511-max-tg/c16c129c6a68b09a", { "id": "m11", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/palsys-83244930-max-tg/6d48479b0aeaeaaa", { "id": "m10", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/sstandc-28691321-max-tg/6b1c3a25491b99b7", { "id": "m12", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/eoihospitality-95451145-max-tg/8b28f9e1a8fc7363", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/alpsgiken-16831332-max-tg/778085142a5812a7", { "id": "m19", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fortune-52356446-max-tg/d311cd4f8746cfef", { "id": "m16", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chenyancg-16822994-max-tg/9ad334699210100a", { "id": "m17", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/colliers-23984185-max-tg/afcf3722151faf1b", { "id": "m18", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/newlife-25899142-max-tg/db95bea889e7d63d", { "id": "m13", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/invni-22859168-max-tg/c9668b000869b284", { "id": "m14", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/grobesttaiwan-83395697-max-tg/2c5ee1fd76c536f1", { "id": "m15", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "SampleCount",
+                "period": 60,
+                "title": "AP002-RequestCount-Max"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 16,
+            "y": 81,
+            "width": 8,
+            "height": 9,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/celavitaipei-82798594-app-tg/b24fe0aeb0cd7f35", { "id": "m1", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/given-23487095-app-tg/2727ee87f05daac1", { "id": "m2", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fuburg-30851864-app-tg/d9dd7677e3fc250b", { "id": "m3", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chchr-22391179-app-tg/4fa8d5acdd73f156", { "id": "m4", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/niching-84355650-app-tg/4eb9be815007b68f", { "id": "m5", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/yungloong-11214205-app-tg/7650f4b9e2a38eeb", { "id": "m6", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/golgroup-42847916-app-tg/928fd340f6b3f4ea", { "id": "m7", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/greenfiltec-54795527-app-tg/b6de83e49729cc3e", { "id": "m8", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/yikung-85856511-app-tg/7f456a59d9d6300e", { "id": "m9", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/palsys-83244930-app-tg/2cbcdde194597263", { "id": "m10", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/sstandc-28691321-app-tg/1bd729dbd1e650d8", { "id": "m11", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/eoihospitality-95451145-app-tg/219570fd3ec9ea6a", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/alpsgiken-16831332-app-tg/d1ab64e6668ad4ba", { "id": "m13", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chenyancg-16822994-app-tg/b4a1002609b9bf29", { "id": "m14", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fortune-52356446-app-tg/109ca496cea1d4a5", { "id": "m15", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/colliers-23984185-app-tg/3282f8205ee58d83", { "id": "m16", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/newlife-25899142-app-tg/15458d1f99aae787", { "id": "m17", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/invni-22859168-app-tg/8c161e71483755cd", { "id": "m18", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/grobesttaiwan-83395697-app-tg/79bda5b8d1e0ef30", { "id": "m19", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "SampleCount",
+                "period": 60,
+                "title": "AP002-RequestCount-App"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 16,
+            "y": 41,
+            "width": 8,
+            "height": 5,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/celavitaipei-82798594-app-tg/b24fe0aeb0cd7f35", "LoadBalancer", "app/celavitaipei-82798594-ALB/675d2bd5eddc0a29", { "label": "celavitaipei-82798594", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/given-23487095-app-tg/2727ee87f05daac1", ".", "app/given-23487095-ALB/97d11bf4b5e3d80b", { "label": "given-23487095", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fuburg-30851864-app-tg/d9dd7677e3fc250b", ".", "app/fuburg-30851864-ALB/12a6e2acc7a1a2a9", { "label": "fuburg-30851864", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chchr-22391179-app-tg/4fa8d5acdd73f156", ".", "app/chchr-22391179-ALB/6e93a494b2706478", { "label": "chchr-22391179", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/niching-84355650-app-tg/4eb9be815007b68f", ".", "app/niching-84355650-ALB/f9de0bf9a9c66229", { "label": "niching-84355650", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/yungloong-11214205-app-tg/7650f4b9e2a38eeb", ".", "app/yungloong-11214205-ALB/bb05f8c0c928721f", { "label": "yungloong-11214205", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/golgroup-42847916-app-tg/928fd340f6b3f4ea", ".", "app/golgroup-42847916-ALB/96ae96cff58d91cb", { "label": "golgroup-42847916", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/greenfiltec-54795527-app-tg/b6de83e49729cc3e", ".", "app/greenfiltec-54795527-ALB/febd2422fc7a6b3d", { "label": "greenfiltec-54795527", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/yikung-85856511-app-tg/7f456a59d9d6300e", ".", "app/yikung-85856511-ALB/dce52dfb5d03a498", { "label": "yikung-85856511", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/palsys-83244930-app-tg/2cbcdde194597263", ".", "app/palsys-83244930-ALB/5982624ff3bdf6ae", { "label": "palsys-83244930", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/sstandc-28691321-app-tg/1bd729dbd1e650d8", ".", "app/sstandc-28691321-ALB/ef76ddc3d6134304", { "label": "sstandc-28691321", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/alpsgiken-16831332-app-tg/d1ab64e6668ad4ba", ".", "app/alpsgiken-16831332-ALB/4837f3194b7d3463", { "label": "alpsgiken-16831332", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/chenyancg-16822994-app-tg/b4a1002609b9bf29", ".", "app/chenyancg-16822994-ALB/b8acde661a10fb44", { "label": "chenyancg-16822994", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/fortune-52356446-app-tg/109ca496cea1d4a5", ".", "app/fortune-52356446-ALB/bf0d346b3f5d862b", { "label": "fortune-52356446", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/colliers-23984185-app-tg/3282f8205ee58d83", ".", "app/colliers-23984185-ALB/3e9d573487238a6e", { "label": "colliers-23984185", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/newlife-25899142-app-tg/15458d1f99aae787", ".", "app/newlife-25899142-ALB/445ec03c1491cb03", { "label": "newlife-25899142", "region": "ap-northeast-1" } ],
+                    [ ".", ".", ".", "targetgroup/invni-22859168-app-tg/8c161e71483755cd", "AvailabilityZone", "ap-northeast-1a", "LoadBalancer", "app/invni-22859168-ALB/8c2346b710ad8c3c", { "label": "invni-22859168", "region": "ap-northeast-1" } ],
+                    [ ".", ".", ".", "targetgroup/grobesttaiwan-83395697-app-tg/79bda5b8d1e0ef30", "LoadBalancer", "app/grobesttaiwan-83395697-ALB/fd91213228226df2", { "label": "grobesttaiwan-83395697", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/cigpower-81481909-app-tg/f9487f20a1d85905", ".", "app/cigpower-81481909-ALB/75fa732a39313b61", { "label": "cigpower-81481909", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-lianglaw-48861436-app/1f8d84f89ac98e28", ".", "app/alb-lianglaw-48861436/672e9bda106f9eec", { "label": "liang-law-48861436", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-shihzhen-00173245-app/1c74d01d7a428e6f", ".", "app/alb-shihzhen-00173245/1f0f36e7cc779ae5", { "label": "shihzhen-00173245", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/aws002-app-tg/8ad10be92be6d032", ".", "app/12345678-ALB/471f2edbf4696819", { "label": "aws002", "region": "ap-northeast-1" } ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": false,
+                "setPeriodToTimeRange": false,
+                "title": "AP002-HealthyHostCount-APP",
+                "trend": true
+            }
+        },
+        {
+            "type": "metric",
+            "x": 18,
+            "y": 16,
+            "width": 6,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "CWAgent", "disk_used_percent", "path", "/", "host", "ip-193-168-8-167", "device", "nvme0n1p1", "fstype", "ext4", { "color": "#b088f5", "label": "DB002a", "region": "ap-northeast-1" } ],
+                    [ "...", "/mnt/DB001_backup", ".", "ip-193-168-8-19", ".", "nvme1n1", ".", ".", { "color": "#ffc6a4", "region": "ap-northeast-1" } ],
+                    [ "...", "/mnt/DB002a_backup", ".", ".", ".", "nvme2n1", ".", ".", { "color": "#dfc8ff", "region": "ap-northeast-1" } ],
+                    [ "...", "/mnt/DB003_backup", ".", ".", ".", "nvme3n1", ".", ".", { "color": "#98dcf5", "region": "ap-northeast-1" } ],
+                    [ "...", "/mnt/DB004_backup", ".", ".", ".", "nvme4n1", ".", ".", { "region": "ap-northeast-1", "color": "#95a5a6" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Maximum",
+                "title": "Disk_used_% - DB"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 10,
+            "y": 23,
+            "width": 5,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "CWAgent", "disk_used_percent", "path", "/", "host", "ip-193-168-8-31", "device", "nvme0n1p1", "fstype", "ext4", { "label": "AP001a", "color": "#69ae34", "region": "ap-northeast-1" } ],
+                    [ "...", "/mnt/AP001_backup", ".", ".", ".", "nvme1n1", ".", ".", { "label": "AP001_backup", "color": "#95a5a6", "region": "ap-northeast-1", "visible": false } ],
+                    [ "...", "/", ".", "ip-193-168-8-26", ".", "nvme0n1p1", ".", ".", { "label": "AP002", "color": "#fe6e73", "region": "ap-northeast-1" } ],
+                    [ "...", "/mnt/AP002_backup", ".", ".", ".", "nvme1n1", ".", ".", { "label": "AP002_backup", "color": "#ffc4c0", "region": "ap-northeast-1", "visible": false } ],
+                    [ "...", "/", ".", "ip-193-168-8-54", ".", "nvme0n1p1", ".", ".", { "region": "ap-northeast-1", "color": "#dfb52c", "label": "AP003", "visible": false } ],
+                    [ "...", "/mnt/AP003_backup", ".", ".", ".", "nvme1n1", ".", ".", { "label": "AP003_backup", "color": "#f7db8a", "region": "ap-northeast-1", "visible": false } ],
+                    [ "...", "/", ".", "ip-193-168-8-33", ".", "nvme0n1p1", ".", ".", { "color": "#00819c", "label": "AP003a", "region": "ap-northeast-1" } ],
+                    [ "...", "ip-193-168-8-34", ".", ".", ".", ".", { "color": "#A76F63", "label": "AP004", "region": "ap-northeast-1" } ],
+                    [ "...", "/mnt/AP004_backup", ".", ".", ".", "nvme1n1", ".", ".", { "label": "AP004_backup", "color": "#ffede2", "region": "ap-northeast-1", "visible": false } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Maximum",
+                "title": "disk_used_% - AP"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 48,
+            "width": 8,
+            "height": 11,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/lydsec-53763673-max-tg/8b1e8fffd81215c0", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "label": "lydsec-53763673", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/jll-30925562-max-tg/d89426f1601e66ec", ".", ".", { "label": "jll-30925562", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/inhotelgroup-53376758-max-tg/2e0a68a9e1ade97d", ".", ".", { "label": "inhotelgroup-53376758", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/aventacell-54865635-max-tg/beda1f3a1e6ea6c7", ".", ".", { "label": "aventacell-54865635", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/christiandior-16085898-max-tg/da8ee6472caf6c78", ".", ".", { "label": "christiandior-16085898", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/zehong-83237570-max-tg/0f3a1bf1c83b00a3", ".", ".", { "label": "zehong-83237570", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/setl-23851431-max-tg/53d20b5e85856cca", ".", ".", { "label": "setl-23851431", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/country-04173290-max-tg/d550832c28c1929d", ".", "app/country-04173290-alb/f8115073ee00e50b", { "label": "country-04173290", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/full-chain-90143492-max-tg/418f9195e6d401c6", ".", "app/full-chain-90143492-ALB/8a9e080200c93f60", { "label": "full-chain-90143492", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/originalbeauty-96683517-max-tg/73d45206c480960c", ".", "app/originalbeauty-96683517-ALB/922ee15e17fbccdd", { "label": "originalbeauty-96683517", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tachiz-24899356-max-tg/2d01318ddeeed937", ".", "app/tachiz-24899356-ALB/52f5de586533c616", { "label": "tachiz-24899356", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/ametek-29185049-max-tg/1e53c5e2ff39a780", ".", "app/ametek-29185049-ALB/e9d7a119f47c4644", { "label": "ametek-29185049", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/pxpayplus-83190786-max-tg/b68cfa762b679531", ".", "app/ALB-003b-hrmax/8f2dba34ae4657db", { "label": "pxpayplus-83190786", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/wavepower-80112843-max-tg/e62c72812f7233ce", ".", ".", { "label": "wavepower-80112843", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/asip-47299332-max-tg/bad2cbe0ad5cf23d", ".", ".", { "label": "asip-47299332", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/hongpu-23113054-max-tg/6ec222bf1e973e4f", ".", ".", { "label": "hongpu-23113054", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/cdwe-82817229-max-tg/6c66e328439da024", ".", "app/ALB-003c-hrmax/e5e16405d34250b0", { "label": "cdwe-82817229", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/showyou-53352475-max-tg/d380d0c56aa00d47", ".", ".", { "label": "showyou-53352475", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/aetc-22755240-max-tg/f9af7da3bcdea5bd", ".", ".", { "label": "aetc-22755240", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-artilux-24624152-max/3c7b96ad53795878", ".", "app/alb-artilux-24624152/052beb3d1b86c46f", { "label": "artilux-24624152" } ],
+                    [ "...", "targetgroup/aws003-max-tg/3f5ba4ac01b089bd", ".", "app/12345678-ALB/471f2edbf4696819", { "label": "aws003", "region": "ap-northeast-1" } ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": true,
+                "setPeriodToTimeRange": false,
+                "title": "AP003-HealthyHostCount-Max",
+                "trend": true
+            }
+        },
+        {
+            "type": "metric",
+            "x": 8,
+            "y": 48,
+            "width": 8,
+            "height": 11,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/lydsec-53763673-portal-tg/b27cfd6cc779b8e0", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "label": "lydsec-53763673", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/jll-30925562-portal-tg/219e2fd341798cea", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "label": "jll-30925562", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/inhotelgroup-53376758-portal-tg/f32beb83d672d8f8", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "label": "inhotelgroup-53376758", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/aventacell-54865635-portal-tg/999ac07ef2834ad0", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "label": "aventacell-54865635", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/christiandior-16085898-portal-tg/6fafcc0c29c6a864", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "label": "christiandior-16085898", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/zehong-83237570-portal-tg/d6773093f0d44f2f", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "label": "zehong-83237570", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/setl-23851431-portal-tg/f8975e53de70d88e", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "label": "setl-23851431", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/country-04173290-portal-tg/5cf58fc8711233de", "LoadBalancer", "app/country-04173290-alb/f8115073ee00e50b", { "label": "country-04173290", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/full-chain-90143492-portal-tg/5486b55f3f930e7b", "LoadBalancer", "app/full-chain-90143492-ALB/8a9e080200c93f60", { "label": "full-chain-90143492", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/originalbeauty-96683517-porta-tg/f5984cf92342bb71", "LoadBalancer", "app/originalbeauty-96683517-ALB/922ee15e17fbccdd", { "region": "ap-northeast-1", "label": "originalbeauty-96683517" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/tachiz-24899356-portal-tg/5983dea507e17f34", "LoadBalancer", "app/tachiz-24899356-ALB/52f5de586533c616", { "label": "tachiz-24899356", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/ametek-29185049-portal-tg/e43279d50450ce53", "LoadBalancer", "app/ametek-29185049-ALB/e9d7a119f47c4644", { "label": "ametek-29185049", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/pxpayplus-83190786-portal-tg/fcee28a1e8ae12d0", "LoadBalancer", "app/ALB-003b-hrmax/8f2dba34ae4657db", { "label": "pxpayplus-83190786", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/wavepower-80112843-portal-tg/1fcd58274d3e4470", "LoadBalancer", "app/ALB-003b-hrmax/8f2dba34ae4657db", { "label": "wavepower-80112843", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/asip-47299332-portal-tg/efd1f4f38ac2705f", "LoadBalancer", "app/ALB-003b-hrmax/8f2dba34ae4657db", { "label": "asip-47299332", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/hongpu-23113054-portal-tg/83910ab73b6c2273", "LoadBalancer", "app/ALB-003b-hrmax/8f2dba34ae4657db", { "region": "ap-northeast-1", "label": "hongpu-23113054" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/cdwe-82817229-poratl-tg/1e98b6484a7c36e7", "LoadBalancer", "app/ALB-003c-hrmax/e5e16405d34250b0", { "label": "cdwe-82817229", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/showyou-53352475-portal-tg/664997b220404cd0", "LoadBalancer", "app/ALB-003c-hrmax/e5e16405d34250b0", { "label": "showyou-53352475", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/aetc-22755240-portal-tg/8a76d7011196d11c", "LoadBalancer", "app/ALB-003c-hrmax/e5e16405d34250b0", { "label": "aetc-22755240", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/tg-artilux-24624152-portal/cbb81babdca0a84f", "LoadBalancer", "app/alb-artilux-24624152/052beb3d1b86c46f", { "label": "artilux-24624152", "region": "ap-northeast-1" } ],
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/aws003-portal-tg/8442eefe7a10ef6d", "LoadBalancer", "app/12345678-ALB/471f2edbf4696819", { "label": "aws003", "region": "ap-northeast-1" } ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": true,
+                "setPeriodToTimeRange": false,
+                "title": "AP003-HealthyHostCount-Portal",
+                "trend": true
+            }
+        },
+        {
+            "type": "metric",
+            "x": 16,
+            "y": 48,
+            "width": 8,
+            "height": 11,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/lydsec-53763673-app-tg/ec04150a687b83fe", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "label": "lydsec-53763673", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/jll-30925562-app-tg/6f95ffce01b1df7a", ".", ".", { "label": "jll-30925562", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/inhotelgroup-53376758-app-tg/64d0c28107017a74", ".", ".", { "label": "inhotelgroup-53376758", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/aventacell-54865635-app-tg/3057f5bdf744e6ac", ".", ".", { "label": "aventacell-54865635", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/christiandior-16085898-app-tg/50460adbef86b4ec", ".", ".", { "label": "christiandior-16085898", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/zehong-83237570-app-tg/fee91eee840dc6ad", ".", ".", { "label": "zehong-83237570", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/setl-23851431-app-tg/8b437ea0da87c274", ".", ".", { "label": "setl-23851431", "region": "ap-northeast-1" } ],
+                    [ ".", ".", ".", "targetgroup/country-04173290-app-tg/b423f1f263c27659", "AvailabilityZone", "ap-northeast-1a", "LoadBalancer", "app/country-04173290-alb/f8115073ee00e50b", { "label": "country-04173290", "region": "ap-northeast-1" } ],
+                    [ ".", ".", ".", "targetgroup/full-chain-90143492-app-tg/7a65b2cb7ce73f01", "LoadBalancer", "app/full-chain-90143492-ALB/8a9e080200c93f60", { "label": "full-chain-90143492", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/originalbeauty-96683517-app-tg/1c9237e07a3e0acb", ".", "app/originalbeauty-96683517-ALB/922ee15e17fbccdd", { "label": "originalbeauty-96683517", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tachiz-24899356-app-tg/ccce5a7983c72a55", ".", "app/tachiz-24899356-ALB/52f5de586533c616", { "label": "tachiz-24899356", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/ametek-29185049-app-tg/408302599e7252f8", ".", "app/ametek-29185049-ALB/e9d7a119f47c4644", { "label": "ametek-29185049", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/pxpayplus-83190786-app-tg/ce5c36db344b68fc", ".", "app/ALB-003b-hrmax/8f2dba34ae4657db", { "label": "pxpayplus-83190786", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/wavepower-80112843-app-tg/93428ee8677d4403", ".", ".", { "label": "wavepower-80112843", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/asip-47299332-app-tg/1ef3a93bd3262900", ".", ".", { "label": "asip-47299332", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/hongpu-23113054-app-tg/9990f9d4dfa6c6eb", ".", ".", { "label": "hongpu-23113054", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/cdwe-82817229-app-tg/435d264b8ed76307", ".", "app/ALB-003c-hrmax/e5e16405d34250b0", { "label": "cdwe-82817229", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/showyou-53352475-app-tg/35a93f62a2739b87", ".", ".", { "label": "showyou-53352475", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/aetc-22755240-app-tg/b8dd57162d115f54", ".", ".", { "label": "aetc-22755240", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-artilux-24624152-app/c8a38fdef695470c", ".", "app/alb-artilux-24624152/052beb3d1b86c46f", { "label": "artilux-24624152" } ],
+                    [ "...", "targetgroup/aws003-app-tg/7dc79af864c3de7e", ".", "app/12345678-ALB/471f2edbf4696819", { "label": "aws003", "region": "ap-northeast-1" } ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": true,
+                "setPeriodToTimeRange": false,
+                "title": "AP003-HealthyHostCount-APP",
+                "trend": true
+            }
+        },
+        {
+            "type": "text",
+            "x": 0,
+            "y": 14,
+            "width": 24,
+            "height": 2,
+            "properties": {
+                "markdown": "# 機器效能監測項目\n \nEC2[link](https://ap-northeast-1.console.aws.amazon.com/ec2/home?region=ap-northeast-1#Instances:) \n "
+            }
+        },
+        {
+            "type": "text",
+            "x": 0,
+            "y": 30,
+            "width": 24,
+            "height": 2,
+            "properties": {
+                "markdown": "# AP001-連線健康狀態\n## ALB監測"
+            }
+        },
+        {
+            "type": "text",
+            "x": 0,
+            "y": 39,
+            "width": 24,
+            "height": 2,
+            "properties": {
+                "markdown": "# AP002-連線健康狀態\n## ALB監測"
+            }
+        },
+        {
+            "type": "text",
+            "x": 0,
+            "y": 46,
+            "width": 24,
+            "height": 2,
+            "properties": {
+                "markdown": "# AP003-連線健康狀態\n## ALB監測"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 90,
+            "width": 8,
+            "height": 9,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/lydsec-53763673-portal-tg/b27cfd6cc779b8e0", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "region": "ap-northeast-1", "label": "lydsec-53763673-portal-tg", "yAxis": "left" } ],
+                    [ "...", "targetgroup/jll-30925562-portal-tg/219e2fd341798cea", ".", ".", { "region": "ap-northeast-1", "label": "jll-30925562-portal-tg", "yAxis": "left" } ],
+                    [ "...", "targetgroup/inhotelgroup-53376758-portal-tg/f32beb83d672d8f8", ".", ".", { "region": "ap-northeast-1", "label": "inhotelgroup-53376758-portal-tg", "yAxis": "left" } ],
+                    [ "...", "targetgroup/aventacell-54865635-portal-tg/999ac07ef2834ad0", ".", ".", { "region": "ap-northeast-1", "label": "aventacell-54865635-portal-tg", "yAxis": "left" } ],
+                    [ "...", "targetgroup/christiandior-16085898-portal-tg/6fafcc0c29c6a864", ".", ".", { "region": "ap-northeast-1", "label": "christiandior-16085898-portal-tg", "yAxis": "left" } ],
+                    [ "...", "targetgroup/zehong-83237570-portal-tg/d6773093f0d44f2f", ".", ".", { "region": "ap-northeast-1", "label": "zehong-83237570-portal-tg" } ],
+                    [ "...", "targetgroup/setl-23851431-portal-tg/f8975e53de70d88e", ".", ".", { "region": "ap-northeast-1", "label": "setl-23851431-portal-tg" } ],
+                    [ "...", "targetgroup/country-04173290-portal-tg/5cf58fc8711233de", ".", "app/country-04173290-alb/f8115073ee00e50b", { "region": "ap-northeast-1", "label": "country-04173290-portal-tg" } ],
+                    [ "...", "targetgroup/full-chain-90143492-portal-tg/5486b55f3f930e7b", ".", "app/full-chain-90143492-ALB/8a9e080200c93f60", { "region": "ap-northeast-1", "label": "full-chain-90143492-portal-tg" } ],
+                    [ ".", ".", ".", "targetgroup/originalbeauty-96683517-porta-tg/f5984cf92342bb71", { "region": "ap-northeast-1", "label": "originalbeauty-96683517-porta-tg" } ],
+                    [ "...", "targetgroup/tachiz-24899356-portal-tg/5983dea507e17f34", { "region": "ap-northeast-1", "label": "tachiz-24899356-portal-tg" } ],
+                    [ "...", "targetgroup/ametek-29185049-portal-tg/e43279d50450ce53", { "region": "ap-northeast-1", "label": "ametek-29185049-portal-tg" } ],
+                    [ ".", ".", ".", "targetgroup/aws003-portal-tg/8442eefe7a10ef6d", "LoadBalancer", "app/12345678-ALB/471f2edbf4696819", { "region": "ap-northeast-1", "label": "aws003-portal" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "SampleCount",
+                "period": 60,
+                "title": "AP003-RequestCount-Portal"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 8,
+            "y": 90,
+            "width": 8,
+            "height": 9,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/lydsec-53763673-max-tg/8b1e8fffd81215c0", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/jll-30925562-max-tg/d89426f1601e66ec", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/inhotelgroup-53376758-max-tg/2e0a68a9e1ade97d", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/aventacell-54865635-max-tg/beda1f3a1e6ea6c7", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/christiandior-16085898-max-tg/da8ee6472caf6c78", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/zehong-83237570-max-tg/0f3a1bf1c83b00a3", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/setl-23851431-max-tg/53d20b5e85856cca", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/country-04173290-max-tg/d550832c28c1929d", ".", "app/country-04173290-alb/f8115073ee00e50b", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/full-chain-90143492-max-tg/418f9195e6d401c6", ".", "app/full-chain-90143492-ALB/8a9e080200c93f60", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/originalbeauty-96683517-max-tg/73d45206c480960c", ".", "app/originalbeauty-96683517-ALB/922ee15e17fbccdd", { "region": "ap-northeast-1" } ],
+                    [ ".", "HealthyHostCount", ".", "targetgroup/tachiz-24899356-portal-tg/5983dea507e17f34", ".", "app/tachiz-24899356-ALB/52f5de586533c616", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/ametek-29185049-portal-tg/e43279d50450ce53", ".", "app/ametek-29185049-ALB/e9d7a119f47c4644", { "region": "ap-northeast-1" } ],
+                    [ ".", "RequestCountPerTarget", ".", "targetgroup/aws003-max-tg/3f5ba4ac01b089bd", ".", "app/12345678-ALB/471f2edbf4696819", { "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "SampleCount",
+                "period": 60,
+                "title": "AP003-RequestCount-Max"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 16,
+            "y": 90,
+            "width": 8,
+            "height": 9,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", "targetgroup/lydsec-53763673-app-tg/ec04150a687b83fe", "LoadBalancer", "app/ALB-003a-hrmax/efbe78bf17e625c5", { "region": "ap-northeast-1", "label": "lydsec-53763673" } ],
+                    [ "...", "targetgroup/jll-30925562-app-tg/6f95ffce01b1df7a", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/inhotelgroup-53376758-app-tg/64d0c28107017a74", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/aventacell-54865635-app-tg/3057f5bdf744e6ac", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/christiandior-16085898-app-tg/50460adbef86b4ec", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/zehong-83237570-app-tg/fee91eee840dc6ad", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/setl-23851431-app-tg/8b437ea0da87c274", ".", ".", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/country-04173290-app-tg/b423f1f263c27659", ".", "app/country-04173290-alb/f8115073ee00e50b", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/full-chain-90143492-app-tg/7a65b2cb7ce73f01", ".", "app/full-chain-90143492-ALB/8a9e080200c93f60", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/originalbeauty-96683517-app-tg/1c9237e07a3e0acb", ".", "app/originalbeauty-96683517-ALB/922ee15e17fbccdd", { "region": "ap-northeast-1" } ],
+                    [ ".", "HealthyHostCount", ".", "targetgroup/tachiz-24899356-app-tg/ccce5a7983c72a55", ".", "app/tachiz-24899356-ALB/52f5de586533c616", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/ametek-29185049-app-tg/408302599e7252f8", ".", "app/ametek-29185049-ALB/e9d7a119f47c4644", { "region": "ap-northeast-1" } ],
+                    [ ".", "RequestCountPerTarget", ".", "targetgroup/aws003-app-tg/7dc79af864c3de7e", ".", "app/12345678-ALB/471f2edbf4696819", { "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "SampleCount",
+                "period": 60,
+                "title": "AP003-RequestCount-App"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 6,
+            "y": 2,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "FreeableMemory", "DatabaseClass", "db.r8g.2xlarge", { "color": "#69ae34", "region": "ap-northeast-1" } ],
+                    [ ".", "SwapUsage", ".", ".", { "region": "ap-northeast-1", "yAxis": "right" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "Average",
+                "period": 60,
+                "title": "hrmax001-FreeableMemory, SwapUsage"
+            }
+        },
+        {
+            "type": "text",
+            "x": 0,
+            "y": 0,
+            "width": 24,
+            "height": 2,
+            "properties": {
+                "markdown": "# RDS\n## 即時效能\n"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 12,
+            "y": 2,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "WriteIOPS", "DBInstanceIdentifier", "hrmax001", { "color": "#eb92ad", "region": "ap-northeast-1" } ],
+                    [ "AWS/RDS", "ReadIOPS", "DBInstanceIdentifier", "hrmax001", { "region": "ap-northeast-1", "color": "#dfb52c" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "Average",
+                "period": 60,
+                "title": "hrmax001-ReadIOPS, WriteIOPS"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 2,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "CPUUtilization", "DatabaseClass", "db.r8g.2xlarge", { "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "Maximum",
+                "period": 60,
+                "title": "hrmax001-CPUUtilization"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 18,
+            "y": 2,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "FreeStorageSpace", "DatabaseClass", "db.r8g.2xlarge", { "color": "#b088f5", "region": "ap-northeast-1", "label": "FreeStorageSpace" } ],
+                    [ ".", "BinLogDiskUsage", "DBInstanceIdentifier", "hrmax001", { "region": "ap-northeast-1", "yAxis": "right" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "Average",
+                "period": 60,
+                "title": "hrmax001-FreeStorageSpace, BinLogDiskUsage"
+            }
+        },
+        {
+            "type": "text",
+            "x": 0,
+            "y": 59,
+            "width": 24,
+            "height": 2,
+            "properties": {
+                "markdown": "# AP004-連線健康狀態\n## ALB監測"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 61,
+            "width": 8,
+            "height": 5,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/tg-dhc-89403744-max/3ea4ffd63cab859a", "LoadBalancer", "app/alb-dhc-89403744/018abbedc1e36433", { "label": "dhc-89403744", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-leadership-25063115-max/b5b2ff87d86ed98e", ".", "app/alb-leadership-25063115/5490e2d4fb318dc7", { "label": "leadership-25063115", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-tasahr-66393929-max/ed671cc770b83218", ".", "app/alb-tasahr-66393929/4719d3bf84839cd9", { "label": "tasahr-66393929", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-cmgnk-24789219-max/2b2fb3a0ec992172", ".", "app/alb-cmgnk-24789219/11b3655ba2244f23", { "label": "cmgnk-24789219", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-hitecups-28161408-max/90dc9390d53e5aa6", ".", "app/alb-hitecups-28161408/406227da75287516", { "label": "hitecups-28161408", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-bonny-53015214-max/d0aba16ed04df887", ".", "app/alb-bonny-53015214/b3b58cdf097ad771", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-unicomp-28676383-max/fa5ee648b7489a51", ".", "app/alb-unicomp-28676383/8299e87e4fdf6cb7", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-winsome-12998177-max/18bbe0b6d4875133", ".", "app/alb-winsome-12998177/5fa0b557f12b1be9", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-ichef-53750585-max/58ab0b93810378fc", ".", "app/alb-ichef-53750585/0c5eba4daed555e7", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-dawningtech-12616121-max/2d49d3fd430b34c8", ".", "app/alb-dawningtech-12616121/32a77c3308638b95", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-veeco-12723115-max/d4112f02a3c7864f", ".", "app/alb-veeco-12723115/d1fa67e6aefd08fc", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-mytime-82862595-max/e6f5ebc7629638db", ".", "app/alb-mytime-82862595/00cc14596110d46d", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-dasin-40811650-max/c2d07db1f6a49f38", ".", "app/alb-dasin-40811650/d397cff04fc10296", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-gaiusauto-53077689-max/cfaf97b6f310ed9a", ".", "app/alb-gaiusauto-53077689/d7dc0477613e8069", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-ntpm-01993858-max/810d513a8e48a82f", ".", "app/alb-ntpm-01993858/5c2048e970631a60", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-ulcoattaiwan-70817147-max/89d3e04b14e67ee3", ".", "app/alb-ulcoattaiwan-70817147/263449a4dbbd18c1", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-royalbase-80020979-max/e3255012765192de", ".", "app/alb-royalbase-80020979/dfc7f6be017a5cce", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-chtsecurity-55765649-max/4fc5923def20e65a", ".", "app/alb-chtsecurity-55765649/5cd94723e8ce5b04", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-actutek-60626670-max/ad2648aca28ec5a3", ".", "app/alb-actutek-60626670/640d5e3fc0163de5", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-greentran-24490251-max/ba9d53e97c850965", ".", "app/alb-greentran-24490251/c4f92b7b0aa9f78b" ],
+                    [ "...", "targetgroup/tg-kst-59276051-max/13e66d28ff3f450b", ".", "app/alb-kst-59276051/761be22b446a64a8" ],
+                    [ "...", "targetgroup/tg-magnoli-22247338-max/4e8ae0b1b4aad921", ".", "app/alb-magnoli-22247338/3d76c2f6dd09fde8" ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": true,
+                "setPeriodToTimeRange": false,
+                "title": "AP004-HealthyHostCount-Max",
+                "trend": true
+            }
+        },
+        {
+            "type": "metric",
+            "x": 8,
+            "y": 61,
+            "width": 8,
+            "height": 5,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/tg-dhc-89403744-portal/d14c3a9103abd060", "LoadBalancer", "app/alb-dhc-89403744/018abbedc1e36433", { "label": "dhc-89403744", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-leadership-25063115-portal/cdad98f30dde8245", ".", "app/alb-leadership-25063115/5490e2d4fb318dc7", { "label": "leadership-25063115", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-tasahr-66393929-portal/a4de4ae020d94372", ".", "app/alb-tasahr-66393929/4719d3bf84839cd9", { "label": "tasahr-66393929", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-cmgnk-24789219-portal/15683648fd40e8be", ".", "app/alb-cmgnk-24789219/11b3655ba2244f23", { "label": "cmgnk-24789219", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-hitecups-28161408-portal/5ee2cb887149e008", ".", "app/alb-hitecups-28161408/406227da75287516", { "label": "hitecups-28161408", "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-bonny-53015214-portal/76a568ceda65efdb", ".", "app/alb-bonny-53015214/b3b58cdf097ad771", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-unicomp-28676383-portal/a7fef139fd8072bd", ".", "app/alb-unicomp-28676383/8299e87e4fdf6cb7", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-winsome-12998177-portal/6f3a07b6eeeae96f", ".", "app/alb-winsome-12998177/5fa0b557f12b1be9", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-ichef-53750585-portal/44771560d13f305c", ".", "app/alb-ichef-53750585/0c5eba4daed555e7", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-dawningtech-12616121-portal/c5c86636e2858381", ".", "app/alb-dawningtech-12616121/32a77c3308638b95", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-veeco-12723115-portal/50fef436e1d20d8e", ".", "app/alb-veeco-12723115/d1fa67e6aefd08fc", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-mytime-82862595-portal/533db880c585816f", ".", "app/alb-mytime-82862595/00cc14596110d46d", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-dasin-40811650-portal/55f22fbf721cedd5", ".", "app/alb-dasin-40811650/d397cff04fc10296", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-gaiusauto-53077689-portal/3a1ee12b81fca82a", ".", "app/alb-gaiusauto-53077689/d7dc0477613e8069", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-ntpm-01993858-portal/00bdb92c72f2a37d", ".", "app/alb-ntpm-01993858/5c2048e970631a60", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-ulcoattaiwan-70817147-portal/499685bed8c663d7", ".", "app/alb-ulcoattaiwan-70817147/263449a4dbbd18c1", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-royalbase-80020979-portal/bc4a89183aea5787", ".", "app/alb-royalbase-80020979/dfc7f6be017a5cce", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-chtsecurity-55765649-portal/6685b2f63b6659b2", ".", "app/alb-chtsecurity-55765649/5cd94723e8ce5b04", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-actutek-60626670-portal/dafca6a91b1488c3", ".", "app/alb-actutek-60626670/640d5e3fc0163de5" ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": false,
+                "setPeriodToTimeRange": false,
+                "title": "AP004-HealthyHostCount-Portal",
+                "trend": true
+            }
+        },
+        {
+            "type": "metric",
+            "x": 16,
+            "y": 61,
+            "width": 8,
+            "height": 5,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", "targetgroup/tg-dhc-89403744-app/42e09e9c1caf3ba8", "LoadBalancer", "app/alb-dhc-89403744/018abbedc1e36433", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-leadership-25063115-app/7ed9b82b8fbd0990", ".", "app/alb-leadership-25063115/5490e2d4fb318dc7", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-tasahr-66393929-app/97d4d5a00077ad67", ".", "app/alb-tasahr-66393929/4719d3bf84839cd9", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-cmgnk-24789219-app/d50a02439993ae96", ".", "app/alb-cmgnk-24789219/11b3655ba2244f23", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-hitecups-28161408-app/a167444449995fe0", ".", "app/alb-hitecups-28161408/406227da75287516", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-bonny-53015214-app/f09fa4fa537511a2", ".", "app/alb-bonny-53015214/b3b58cdf097ad771", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-unicomp-28676383-app/7ce286bd26116b3c", ".", "app/alb-unicomp-28676383/8299e87e4fdf6cb7", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-winsome-12998177-app/ff2f8d751e8b7ec3", ".", "app/alb-winsome-12998177/5fa0b557f12b1be9", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-ichef-53750585-app/124da75e60200313", ".", "app/alb-ichef-53750585/0c5eba4daed555e7", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-dawningtech-12616121-app/b0f8eeb5c5df5447", ".", "app/alb-dawningtech-12616121/32a77c3308638b95", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-veeco-12723115-app/139b8d3ad716f4ec", ".", "app/alb-veeco-12723115/d1fa67e6aefd08fc", { "region": "ap-northeast-1" } ],
+                    [ ".", ".", ".", "targetgroup/tg-mytime-82862595-app/a68d3e87870b7994", "AvailabilityZone", "ap-northeast-1a", "LoadBalancer", "app/alb-mytime-82862595/00cc14596110d46d", { "region": "ap-northeast-1" } ],
+                    [ ".", ".", ".", "targetgroup/tg-dasin-40811650-app/beae2ebd62f9736c", "LoadBalancer", "app/alb-dasin-40811650/d397cff04fc10296", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-gaiusauto-53077689-app/e1aa3d145624a462", ".", "app/alb-gaiusauto-53077689/d7dc0477613e8069", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-ntpm-01993858-app/3148834d5c4c9406", ".", "app/alb-ntpm-01993858/5c2048e970631a60", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-ulcoattaiwan-70817147-app/61f0e6081da771cb", ".", "app/alb-ulcoattaiwan-70817147/263449a4dbbd18c1", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-royalbase-80020979-app/c9046678b0ab0620", ".", "app/alb-royalbase-80020979/dfc7f6be017a5cce", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-chtsecurity-55765649-app/729aa89e0fdeb107", ".", "app/alb-chtsecurity-55765649/5cd94723e8ce5b04", { "region": "ap-northeast-1" } ],
+                    [ "...", "targetgroup/tg-actutek-60626670-app/d8e68c7770df49ea", ".", "app/alb-actutek-60626670/640d5e3fc0163de5" ]
+                ],
+                "sparkline": true,
+                "view": "singleValue",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average",
+                "stacked": true,
+                "setPeriodToTimeRange": false,
+                "title": "AP004-HealthyHostCount-APP",
+                "trend": true
+            }
+        },
+        {
+            "type": "metric",
+            "x": 18,
+            "y": 8,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "DatabaseConnections", "DatabaseClass", "db.r8g.2xlarge", { "color": "#fe6e73", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "Average",
+                "period": 60,
+                "title": "hrmax001-DatabaseConnections"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 19,
+            "y": 23,
+            "width": 5,
+            "height": 7,
+            "properties": {
+                "metrics": [
+                    [ "CWAgent", "disk_used_percent", "path", "/mnt/AP001_backup", "host", "ip-193-168-8-29", "device", "nvme2n1", "fstype", "ext4", { "color": "#98dcf5", "region": "ap-northeast-1" } ],
+                    [ "...", "/mnt/AP002_backup", ".", "ip-193-168-8-26", ".", "nvme1n1", ".", ".", { "label": "AP002_backup", "color": "#ffc6a4", "region": "ap-northeast-1" } ],
+                    [ "...", "/mnt/AP003_backup", ".", "ip-193-168-8-29", ".", "nvme3n1", ".", ".", { "color": "#b2df8d" } ],
+                    [ "...", "/mnt/AP004_backup", ".", ".", ".", "nvme1n1", ".", ".", { "color": "#dfc8ff", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Maximum",
+                "title": "disk_used_% - backupAP"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 6,
+            "y": 8,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "DBLoad", "DBInstanceIdentifier", "hrmax001", { "yAxis": "left", "region": "ap-northeast-1", "color": "#A76F63" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "Maximum",
+                "period": 60
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 8,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ { "expression": "DB_PERF_INSIGHTS('RDS', 'db-BJVU7H3CFYG6WOKYQZ2E6TEM5E', ['os.cpuUtilization.steal.avg', 'os.cpuUtilization.guest.avg', 'os.cpuUtilization.irq.avg', 'os.cpuUtilization.wait.avg', 'os.cpuUtilization.user.avg', 'os.cpuUtilization.system.avg', 'os.cpuUtilization.nice.avg'])", "label": "", "id": "e1", "stat": "Maximum", "region": "ap-northeast-1", "visible": false } ],
+                    [ { "expression": "FIRST(SLICE(e1, 0, 1))", "label": "os.cpuUtilization.steal", "id": "e2", "color": "#eb92ad", "stat": "Maximum", "region": "ap-northeast-1" } ],
+                    [ { "expression": "FIRST(SLICE(e1, 1, 2))", "label": "os.cpuUtilization.guest", "id": "e3", "color": "#A76F63", "stat": "Maximum", "region": "ap-northeast-1" } ],
+                    [ { "expression": "FIRST(SLICE(e1, 2, 3))", "label": "os.cpuUtilization.irq", "id": "e4", "color": "#b088f5", "stat": "Maximum", "region": "ap-northeast-1" } ],
+                    [ { "expression": "FIRST(SLICE(e1, 3, 4))", "label": "os.cpuUtilization.wait", "id": "e5", "color": "#fe6e73", "stat": "Maximum", "region": "ap-northeast-1" } ],
+                    [ { "expression": "FIRST(SLICE(e1, 4, 5))", "label": "os.cpuUtilization.user", "id": "e6", "color": "#69ae34", "stat": "Maximum", "region": "ap-northeast-1" } ],
+                    [ { "expression": "FIRST(SLICE(e1, 5, 6))", "label": "os.cpuUtilization.system", "id": "e7", "color": "#f89256", "stat": "Maximum", "region": "ap-northeast-1" } ],
+                    [ { "expression": "FIRST(SLICE(e1, 6, 7))", "label": "os.cpuUtilization.nice", "id": "e8", "color": "#08aad2", "stat": "Maximum", "region": "ap-northeast-1" } ]
+                ],
+                "title": "CPU utilization",
+                "stacked": true,
+                "region": "ap-northeast-1",
+                "view": "timeSeries",
+                "stat": "Maximum",
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "min": 0,
+                        "max": 100,
+                        "label": "Percent",
+                        "showUnits": false
+                    }
+                }
+            }
+        },
+        {
+            "type": "metric",
+            "x": 12,
+            "y": 8,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "ReadThroughput", "DBInstanceIdentifier", "hrmax001", { "region": "ap-northeast-1" } ],
+                    [ "AWS/RDS", "WriteThroughput", "DBInstanceIdentifier", "hrmax001", { "region": "ap-northeast-1" } ],
+                    [ "AWS/RDS", "NetworkReceiveThroughput", "DBInstanceIdentifier", "hrmax001", { "yAxis": "left", "region": "ap-northeast-1" } ],
+                    [ "AWS/RDS", "NetworkTransmitThroughput", "DBInstanceIdentifier", "hrmax001", { "yAxis": "left", "region": "ap-northeast-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "ap-northeast-1",
+                "stat": "Average",
+                "period": 60,
+                "title": "hrmax001-throughput"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 12,
+            "y": 105,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/EBS", "VolumeAvgThroughput", "VolumeId", "vol-0569e3ddde3b3734a", "InstanceId", "i-04963e5a52e30f0cc", { "region": "ap-northeast-1", "color": "#b2df8d", "label": "AP001a" } ],
+                    [ "...", "vol-09eff7f0235e59b59", ".", "i-04d27283a9685c06e", { "region": "ap-northeast-1", "color": "#fe6e73", "label": "AP002" } ],
+                    [ "...", "vol-0e69146c0a1b92ab7", ".", "i-0658b3784fee8fa52", { "region": "ap-northeast-1", "color": "#00819c", "label": "AP003a" } ],
+                    [ "...", "vol-06275ff52d2d36ce9", ".", "i-013976ff5a02ebeea", { "region": "ap-northeast-1", "color": "#A76F63", "label": "AP004" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "title": "VolumeThroughput",
+                "region": "ap-northeast-1",
+                "period": 60,
+                "stat": "Average"
+            }
+        }
+    ]
+}

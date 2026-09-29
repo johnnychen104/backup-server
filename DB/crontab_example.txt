@@ -1,0 +1,14 @@
+# Edit this file with 'crontab -e' on the DB backup instance.
+#
+# Each RDS instance only needs ONE cron entry - 1_run_db_backup_and_upload.sh
+# loops through every company in the config, dumping + uploading each one
+# in turn. There is no separate "upload everything now" job anymore
+# (that used to be the manually maintained BackUp/hrmax003 list of
+# `aws s3 sync` commands, run some time after the dumps finished).
+#
+# DB_PASSWORD must be exported wherever cron picks up its environment
+# (e.g. a small `env_hrmax001.sh` that is NOT committed to this repo),
+# not hard-coded into configs/*.conf.
+
+0 1 * * * DB_PASSWORD="$(cat /home/ubuntu/.secrets/hrmax001_pw)" /bin/bash /home/ubuntu/backup-server/DB/1_run_db_backup_and_upload.sh /home/ubuntu/backup-server/DB/configs/hrmax001.conf >> /home/ubuntu/logs/cron_hrmax001.log 2>&1
+0 2 * * * DB_PASSWORD="$(cat /home/ubuntu/.secrets/hrmax003_pw)" /bin/bash /home/ubuntu/backup-server/DB/1_run_db_backup_and_upload.sh /home/ubuntu/backup-server/DB/configs/hrmax003.conf >> /home/ubuntu/logs/cron_hrmax003.log 2>&1
