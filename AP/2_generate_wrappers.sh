@@ -60,8 +60,17 @@ for CONFIG_FILE in "$CONFIG_DIR"/*.conf; do
 
             WRAPPER_DIR="/home/ubuntu/${AP_NAME}/ehrms2_backup_${PURE_ID}"
             BACKUP_SCRIPT="$WRAPPER_DIR/104AP_backup.sh"
+            OLD_SYNC_SCRIPT="$WRAPPER_DIR/s3sync.sh"
 
             mkdir -p "$WRAPPER_DIR"
+
+            # 舊版(兩階段)產生器會多留一支 s3sync.sh，現在 104AP_backup.sh
+            # 已經把上傳合併進去了，不需要它，清掉舊客戶資料夾裡的殘留檔
+            # 避免混淆(新客戶不會有這支檔案，這是正常、預期的)。
+            if [ -f "$OLD_SYNC_SCRIPT" ]; then
+                rm -f "$OLD_SYNC_SCRIPT"
+                echo "  -> Removed stale s3sync.sh from old two-stage design: $OLD_SYNC_SCRIPT"
+            fi
 
             # ==========================================
             # 產生合併版 Backup+Upload 代理腳本

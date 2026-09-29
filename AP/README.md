@@ -51,6 +51,12 @@
 - 新版把 pull→壓縮→上傳 合併進同一支腳本、同一次迴圈，上傳流量自然分散在整個跑批
   過程，不再需要獨立的「等待上傳」資料夾或第二段排程。本地的 tar.gz 上傳後仍保留
   3 天(`LOCAL_RETENTION_DAYS`)當作快速還原副本，超過天數才由排程清掉。
+- **新增的客戶資料夾裡只會有 `104AP_backup.sh`，不會有 `s3sync.sh`，這是正常的**——
+  合併後的設計不再需要獨立的上傳腳本。舊客戶資料夾裡如果還留著 `s3sync.sh`，是重跑
+  `2_generate_wrappers.sh` 之前、舊版產生器留下的殘留檔；重新產生該客戶的 wrapper
+  時，`2_generate_wrappers.sh` 會自動偵測並刪除這個殘留檔。**部署到正式機前記得先
+  檢查 crontab 有沒有還在排這支 `s3sync.sh`，有的話要一併移除，不然重新產生後
+  crontab 會因為檔案不見而報錯。**
 - 刪除了兩支功能重疊、線上只有一支在用的產生器 (`3_generate_wrapper.sh` 單數版
   是舊的 AP005 專用草稿，已刪除；`cat 3_generate_wrappers.sh` 是誤植的殘留檔，也已刪除)。
 - `BackupServer_Deploy/run_all_104AP_backups.sh` 與 `run_all_s3sync.sh` 是舊產生器
