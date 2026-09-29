@@ -106,12 +106,14 @@ for ID in "${IDS[@]}"; do
     mkdir -p "$TARGET_DIR"
 
     log "Rsyncing data from $AP_HOST ($FOLDER_NAME)..."
-    # 依序同步 uploads(上傳檔案)、logs(系統紀錄)、.ssl(憑證) 三個目錄
-    # 這幾個目錄都是必要的，任何一個失敗都要記錄下來、跳過這間公司
+    # 依序同步 uploads(上傳檔案)、logs(系統紀錄) 兩個必要目錄，任何一個失敗都要
+    # 記錄下來、跳過這間公司
     RSYNC_FAILED=0
     rsync -az -e "$SSH_CMD" "$REMOTE_USER@$AP_HOST:$REMOTE_BASE_DIR/$FOLDER_NAME/uploads/" "$TARGET_DIR/uploads/" || RSYNC_FAILED=1
     rsync -az -e "$SSH_CMD" "$REMOTE_USER@$AP_HOST:$REMOTE_BASE_DIR/$FOLDER_NAME/logs/" "$TARGET_DIR/logs/" || RSYNC_FAILED=1
-    rsync -az -e "$SSH_CMD" "$REMOTE_USER@$AP_HOST:$REMOTE_BASE_DIR/$FOLDER_NAME/.ssl/" "$TARGET_DIR/.ssl/" || RSYNC_FAILED=1
+    # .ssl（不是每間公司都一定有這個資料夾，失敗只記警告、不影響這間公司的備份）
+    rsync -az -e "$SSH_CMD" "$REMOTE_USER@$AP_HOST:$REMOTE_BASE_DIR/$FOLDER_NAME/.ssl/" "$TARGET_DIR/.ssl/" \
+        || log "Warning: rsync failed (.ssl) for $PURE_ID, continuing anyway."
     # App server logs（獨立實例，cwd=packages/@104ha/ehrms-max-app-api）
     rsync -az -e "$SSH_CMD" "$REMOTE_USER@$AP_HOST:$REMOTE_BASE_DIR/$FOLDER_NAME/packages/@104ha/ehrms-max-app-api/logs/" "$TARGET_DIR/logs_app/" || RSYNC_FAILED=1
     # OpenAPI server logs（獨立實例，cwd=packages/@104ha/open-api-server）

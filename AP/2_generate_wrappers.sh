@@ -110,7 +110,9 @@ fi
 # 1. Pull (rsync)
 rsync -az -e "\$SSH_CMD" "\${REMOTE_USER}@\${AP_HOST}:\${REMOTE_BASE_DIR}/\${FOLDER_NAME}/uploads/" "\$TARGET_DIR/uploads/" || { echo "[Wrapper] Error: Rsync failed (uploads)."; exit 1; }
 rsync -az -e "\$SSH_CMD" "\${REMOTE_USER}@\${AP_HOST}:\${REMOTE_BASE_DIR}/\${FOLDER_NAME}/logs/"    "\$TARGET_DIR/logs/"    || { echo "[Wrapper] Error: Rsync failed (logs).";    exit 1; }
-rsync -az -e "\$SSH_CMD" "\${REMOTE_USER}@\${AP_HOST}:\${REMOTE_BASE_DIR}/\${FOLDER_NAME}/.ssl/"     "\$TARGET_DIR/.ssl/"     || { echo "[Wrapper] Error: Rsync failed (.ssl).";     exit 1; }
+
+# .ssl（不是每間公司都一定有這個資料夾，失敗只記警告、不中斷整支備份）
+rsync -az -e "\$SSH_CMD" "\${REMOTE_USER}@\${AP_HOST}:\${REMOTE_BASE_DIR}/\${FOLDER_NAME}/.ssl/"     "\$TARGET_DIR/.ssl/"     || echo "[Wrapper] Warning: Rsync failed (.ssl), continuing anyway."
 
 # App server logs（獨立實例，cwd=packages/@104ha/ehrms-max-app-api）
 rsync -az -e "\$SSH_CMD" "\${REMOTE_USER}@\${AP_HOST}:\${REMOTE_BASE_DIR}/\${FOLDER_NAME}/packages/@104ha/ehrms-max-app-api/logs/" "\$TARGET_DIR/logs_app/" || { echo "[Wrapper] Error: Rsync failed (logs_app)."; exit 1; }
