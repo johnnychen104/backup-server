@@ -66,7 +66,6 @@
   那段「依序嘗試路徑」的邏輯加回去，同時也要把下面這條 app/openapi logs 的邏輯
   合併進去(`AP005_manual_fallback_reference.sh` 這份參考檔還沒加這兩段)。
 - `uploads/`、`logs/`、`.ssl/` 之外，另外拉了兩個獨立實例的 log 目錄：
-  `packages/@104ha/ehrms-max-app-api/logs/` 跟 `packages/@104ha/open-api-server/logs/`，
-  這兩段跟原本三段一樣是「失敗就 exit 1」，假設每間公司都一定有這兩個目錄；如果之後
-  某些客戶沒有跑 app-api 或 open-api-server 這兩個獨立實例，需要另外處理成失敗時
-  不中斷整支備份(例如把 `|| { ...; exit 1; }` 改成只記 log、不 exit)。
+  `packages/@104ha/ehrms-max-app-api/logs/`(必要，失敗會跳過整間公司)跟
+  `packages/@104ha/open-api-server/logs/`(**非必要**，不是每間公司都一定有這個獨立
+  實例，失敗只記警告、不影響這間公司其餘的備份/上傳)。
