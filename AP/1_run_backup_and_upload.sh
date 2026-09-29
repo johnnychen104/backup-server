@@ -12,6 +12,10 @@
 #   - S3 upload traffic is spread out over the whole run instead of
 #     hitting all at once during a single fixed sync window
 #
+# The local tar.gz is kept on the backup server for LOCAL_RETENTION_DAYS
+# (default 3) after upload, as a quick local restore copy - it is not
+# deleted right after a successful upload.
+#
 # Usage: ./1_run_backup_and_upload.sh <path_to_config_file>
 # =================================================================
 
@@ -51,9 +55,10 @@ if [ -n "${SSH_KEY_PATH}" ]; then
     SSH_CMD="ssh -o StrictHostKeyChecking=no -i ${SSH_KEY_PATH}"
 fi
 S3_BUCKET="${S3_BUCKET%/}"
+LOCAL_RETENTION_DAYS="${LOCAL_RETENTION_DAYS:-3}"
 
 log "Starting Backup+Upload run using config: $CONFIG_FILE"
-log "Local staging directory: $LOCAL_BACKUP_DIR"
+log "Local staging directory: $LOCAL_BACKUP_DIR (kept $LOCAL_RETENTION_DAYS days after upload)"
 
 # 5. Main Loop
 for ID in "${IDS[@]}"; do
@@ -103,15 +108,14 @@ for ID in "${IDS[@]}"; do
     aws s3 cp "$LOCAL_BACKUP_DIR/$BACKUP_NAME/$TIMESTAMP.tar.gz" "$S3_BUCKET/$S3_DEST_NAME/AP_Backup/$TIMESTAMP.tar.gz"
 
     if [ $? -eq 0 ]; then
-        log "Upload successful for $PURE_ID."
-        # Uploaded successfully -> no need to keep the local copy around.
-        rm -f "$LOCAL_BACKUP_DIR/$BACKUP_NAME/$TIMESTAMP.tar.gz"
+        log "Upload successful for $PURE_ID. Keeping local copy for $LOCAL_RETENTION_DAYS days."
     else
         log "Error uploading $PURE_ID. Keeping local file for retry on next run."
     fi
 
-    # Safety net: prune anything that repeatedly failed to upload and is going stale.
-    find "$LOCAL_BACKUP_DIR/$BACKUP_NAME" -name "*.tar.gz" -mtime +2 -delete
+    # Local retention: keep the last LOCAL_RETENTION_DAYS days on the backup
+    # server as a quick restore copy (already uploaded to S3 regardless).
+    find "$LOCAL_BACKUP_DIR/$BACKUP_NAME" -name "*.tar.gz" -mtime "+${LOCAL_RETENTION_DAYS}" -delete
 
     echo "----------------------------------------" >> "$LOG_FILE"
 done

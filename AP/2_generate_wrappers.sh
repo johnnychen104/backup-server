@@ -116,14 +116,14 @@ echo "[Wrapper] Backup Success: \${TIMESTAMP}.tar.gz"
 # 3. Upload immediately (no separate sync stage / staging folder)
 echo "[Wrapper] Uploading \${TIMESTAMP}.tar.gz to S3..."
 if aws s3 cp "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}/\${TIMESTAMP}.tar.gz" "\${S3_BUCKET}/\${S3_DEST_NAME}/AP_Backup/\${TIMESTAMP}.tar.gz"; then
-    echo "[Wrapper] S3 Upload Success."
-    rm -f "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}/\${TIMESTAMP}.tar.gz"
+    echo "[Wrapper] S3 Upload Success. Keeping local copy for ${LOCAL_RETENTION_DAYS:-3} days."
 else
     echo "[Wrapper] Error: S3 Upload failed. Keeping local file for retry on next run."
 fi
 
-# 4. Cleanup: safety net for anything that repeatedly failed to upload
-find "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}" -type f -name "*.tar.gz" -mtime +2 -delete
+# 4. Local retention: keep the last ${LOCAL_RETENTION_DAYS:-3} days on the
+#    backup server as a quick restore copy (already uploaded to S3 either way).
+find "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}" -type f -name "*.tar.gz" -mtime +${LOCAL_RETENTION_DAYS:-3} -delete
 find "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}" -mindepth 1 -maxdepth 1 -type d -mtime +1 -exec rm -rf {} +
 exit 0
 EOF

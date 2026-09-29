@@ -1,14 +1,15 @@
 # AP 備份 (Pull + Compress + Upload)
 
 從各台 AP 主機 (AP001~AP005) 用 rsync pull 回 `uploads/`、`logs/`、`.ssl/`，
-在 Backup Server 上壓縮成 `tar.gz`，**壓縮完立刻上傳 S3**，成功後就把本地檔案刪掉。
+在 Backup Server 上壓縮成 `tar.gz`，**壓縮完立刻上傳 S3**，本地備份檔保留 3 天
+(`LOCAL_RETENTION_DAYS`，預設 3)當作快速還原用的副本，過期才清掉，不是上傳成功就立刻刪。
 
 ## 檔案
 
 | 檔案 | 用途 |
-|---|---|
+| --- | --- |
 | `0_setup_env.sh` | Backup Server 環境初始化 (Ubuntu 24.04) |
-| `1_run_backup_and_upload.sh` | 通用版：吃一個 config，逐間公司 pull→壓縮→上傳→清本地 |
+| `1_run_backup_and_upload.sh` | 通用版：吃一個 config，逐間公司 pull→壓縮→上傳→本地保留 3 天 |
 | `2_generate_wrappers.sh` | 讀 `configs/*.conf`，幫每間公司產生獨立的 wrapper script + 每台 AP 一支 run-all |
 | `3_adjust_swap.sh` | 調整 swap 大小的指令備忘 |
 | `configs/AP001.conf` ~ `AP005.conf` | 每台 AP 的連線資訊、公司清單、S3 bucket |
@@ -18,17 +19,24 @@
 ## 兩種用法都可以，正式環境目前是用「產生 wrapper」
 
 1. **產生 wrapper (正式環境用這個)**：
-   ```
+
+   ```bash
    ./2_generate_wrappers.sh
    ```
+
    會依照 `configs/*.conf` 在 `/home/ubuntu/<AP_NAME>/ehrms2_backup_<ID>/104AP_backup.sh`
    產生「每間公司一支、pull+壓縮+上傳一次做完」的腳本，並在
    `/home/ubuntu/backups/run_all_104AP_backups_<AP_NAME>.sh` 產生該台 AP 的彙總腳本。
    crontab 只需要排這支彙總腳本(見 `crontab_example.txt`)，**每台 AP 一行就好，不用再
    多排一個 S3 sync 的排程**。
 
+   新增/異動客戶時，照舊作法：把客戶加進對應的 `configs/AP00X.conf`，再重跑
+   `./2_generate_wrappers.sh` 一次 — 它會把**該台 AP 底下所有客戶**的 wrapper
+   全部重新產生、覆蓋掉舊檔(不是只加新客戶那一份)，這是預期行為，直接覆蓋即可。
+
 2. **手動/單次跑 (不想先產生 wrapper 時)**：
-   ```
+
+   ```bash
    ./1_run_backup_and_upload.sh configs/AP001.conf
    ```
 
@@ -38,8 +46,9 @@
   之後幾小時上傳；`3_generate_wrappers.sh` 產生的 wrapper 也是分成
   `104AP_backup.sh` + `s3sync.sh` 兩支。這會讓本地累積一個「等待上傳」的暫存資料夾，
   而且所有公司的上傳集中在同一個排程時間點一起打 S3。
-- 新版把 pull→壓縮→上傳→清本地 合併進同一支腳本、同一次迴圈，上傳流量自然分散在
-  整個跑批過程，不再需要獨立的上傳資料夾或第二段排程。
+- 新版把 pull→壓縮→上傳 合併進同一支腳本、同一次迴圈，上傳流量自然分散在整個跑批
+  過程，不再需要獨立的「等待上傳」資料夾或第二段排程。本地的 tar.gz 上傳後仍保留
+  3 天(`LOCAL_RETENTION_DAYS`)當作快速還原副本，超過天數才由排程清掉。
 - 刪除了兩支功能重疊、線上只有一支在用的產生器 (`3_generate_wrapper.sh` 單數版
   是舊的 AP005 專用草稿，已刪除；`cat 3_generate_wrappers.sh` 是誤植的殘留檔，也已刪除)。
 - `BackupServer_Deploy/run_all_104AP_backups.sh` 與 `run_all_s3sync.sh` 是舊產生器
