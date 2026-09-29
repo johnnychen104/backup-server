@@ -4,15 +4,24 @@
 # 2_generate_wrappers.sh already produced, per AP:
 #   /home/ubuntu/backups/run_all_104AP_backups_AP00X.sh
 # which pulls + compresses + uploads every company on that AP in one pass.
-# There is no second "S3 sync" job anymore - remove any old 04:00 sync entries.
+# There is no second "S3 sync" job anymore.
+#
+# If your crontab still has old two-stage entries from before this change
+# (a second line per AP calling run_all_s3sync_AP00X.sh, usually ~2 hours
+# after the pull line), DELETE that second line - but only after confirming
+# every company under that AP has already been regenerated with
+# 2_generate_wrappers.sh (i.e. its 104AP_backup.sh already uploads). If an
+# AP hasn't been regenerated yet, removing its s3sync line first means that
+# AP's backups get pulled+compressed but NEVER uploaded to S3.
 
 # Stagger the start time per AP so they don't all hit the network/CPU/S3 at once.
-0  2 * * * /bin/bash /home/ubuntu/backups/run_all_104AP_backups_AP001.sh >> /home/ubuntu/logs/cron_AP001.log 2>&1
-30 2 * * * /bin/bash /home/ubuntu/backups/run_all_104AP_backups_AP002.sh >> /home/ubuntu/logs/cron_AP002.log 2>&1
-0  3 * * * /bin/bash /home/ubuntu/backups/run_all_104AP_backups_AP003.sh >> /home/ubuntu/logs/cron_AP003.log 2>&1
-30 3 * * * /bin/bash /home/ubuntu/backups/run_all_104AP_backups_AP004.sh >> /home/ubuntu/logs/cron_AP004.log 2>&1
-0  4 * * * /bin/bash /home/ubuntu/backups/run_all_104AP_backups_AP005.sh >> /home/ubuntu/logs/cron_AP005.log 2>&1
+0  4 * * * /bin/bash /home/ubuntu/backups/run_all_104AP_backups_AP001.sh > /dev/null 2>&1 &
+10 4 * * * /bin/bash /home/ubuntu/backups/run_all_104AP_backups_AP002.sh > /dev/null 2>&1 &
+20 4 * * * /bin/bash /home/ubuntu/backups/run_all_104AP_backups_AP003.sh > /dev/null 2>&1 &
+30 4 * * * /bin/bash /home/ubuntu/backups/run_all_104AP_backups_AP004.sh > /dev/null 2>&1 &
+40 4 * * * /bin/bash /home/ubuntu/backups/run_all_104AP_backups_AP005.sh > /dev/null 2>&1 &
+50 4 * * * /bin/bash /home/ubuntu/backups/run_all_104AP_backups_AP006.sh > /dev/null 2>&1 &
 
 # ---------------------------------------------------------------
 # Alternative (manual/ad-hoc, config-driven, no pre-generated wrapper):
-# 0 2 * * * /bin/bash /home/ubuntu/scripts/1_run_backup_and_upload.sh /home/ubuntu/scripts/configs/AP001.conf >> /home/ubuntu/logs/cron_AP001.log 2>&1
+# 0 4 * * * /bin/bash /home/ubuntu/scripts/1_run_backup_and_upload.sh /home/ubuntu/scripts/configs/AP001.conf >> /home/ubuntu/logs/cron_AP001.log 2>&1

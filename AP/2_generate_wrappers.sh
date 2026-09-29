@@ -118,7 +118,7 @@ rsync -az -e "\$SSH_CMD" "\${REMOTE_USER}@\${AP_HOST}:\${REMOTE_BASE_DIR}/\${FOL
 rsync -az -e "\$SSH_CMD" "\${REMOTE_USER}@\${AP_HOST}:\${REMOTE_BASE_DIR}/\${FOLDER_NAME}/packages/@104ha/ehrms-max-app-api/logs/" "\$TARGET_DIR/logs_app/" || { echo "[Wrapper] Error: Rsync failed (logs_app)."; exit 1; }
 
 # OpenAPI server logs（獨立實例，cwd=packages/@104ha/open-api-server）
-# 不是每間公司都一定有這個獨立實例，失敗只記警告、不中斷整支備份
+# 失敗只記警告、不中斷整支備份
 rsync -az -e "\$SSH_CMD" "\${REMOTE_USER}@\${AP_HOST}:\${REMOTE_BASE_DIR}/\${FOLDER_NAME}/packages/@104ha/open-api-server/logs/" "\$TARGET_DIR/logs_openapi/" || echo "[Wrapper] Warning: Rsync failed (logs_openapi), continuing anyway."
 
 # 2. Compress

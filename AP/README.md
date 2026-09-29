@@ -79,3 +79,11 @@ logs，必要)與 `packages/@104ha/open-api-server/logs/`(OpenAPI server logs，
   `open-api-server/logs/` 都是**非必要**——不是每間公司都一定會有(實際在 AP006 上
   遇過新客戶連 `.ssl/` 資料夾都還沒建立、rsync 直接失敗的狀況)，這兩個失敗都只記
   警告、不影響這間公司其餘的備份/上傳。
+- 實際環境已經有 `AP006`，但 `configs/` 這裡目前只到 `AP005.conf`——`configs/AP006.conf`
+  還沒補進這個 repo，之後要記得把它加進來，不然這裡的 `2_generate_wrappers.sh`
+  跑起來會跟伺服器上實際的 6 台 AP 對不齊。
+- (2026-09-29 已確認並處理)正式環境 crontab 原本每台 AP 都還留著舊版兩階段排程
+  (一行 pull、一行 `run_all_s3sync_AP00X.sh`)。確認 AP001~006 每間客戶都已經用
+  新版 `2_generate_wrappers.sh` 重新產生過(`104AP_backup.sh` 已內含上傳)之後，
+  六行 `run_all_s3sync_AP00X.sh` 排程已經直接刪除，只留 `run_all_104AP_backups_AP00X.sh`
+  這一行，跟 `crontab_example.txt` 目前的內容一致。
