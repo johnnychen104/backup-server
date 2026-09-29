@@ -8,7 +8,7 @@
 
 | 檔案 | 用途 |
 | --- | --- |
-| `0_setup_env.sh` | Backup Server 環境初始化 (Ubuntu 24.04) |
+| `0_setup_env.sh` | Backup Server 環境初始化 (Ubuntu 24.04 ~ 26.04) |
 | `1_run_backup_and_upload.sh` | 通用版：吃一個 config，逐間公司 pull→壓縮→上傳→本地保留 3 天 |
 | `2_generate_wrappers.sh` | 讀 `configs/*.conf`，幫每間公司產生獨立的 wrapper script + 每台 AP 一支 run-all |
 | `3_adjust_swap.sh` | 調整 swap 大小的指令備忘 |
