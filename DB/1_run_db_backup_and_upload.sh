@@ -15,10 +15,13 @@
 # on the backup server (or fetch it and replace this file) before relying
 # on it for production backups.
 #
-# Design goal: same as the AP side - dump a company, upload it, delete the
-# local copy, move to the next company. No more "dump everything for this
-# RDS instance, then separately upload everything later" - that's what
-# created the pile of local dumps + the standalone hrmax003 upload list.
+# Design goal: same as the AP side - dump a company, upload it, move to the
+# next company. No more "dump everything for this RDS instance, then
+# separately upload everything later" - that's what created the pile of
+# local dumps + the standalone hrmax003 upload list. The local tar.gz is
+# kept for LOCAL_RETENTION_DAYS (default 3) after upload as a quick local
+# restore copy, same as the AP side - it is not deleted right after a
+# successful upload.
 #
 # Usage: ./1_run_db_backup_and_upload.sh <path_to_config_file>
 #   Requires DB_PASSWORD to be set in the environment (do not commit
@@ -55,6 +58,7 @@ log() {
 mysql_dump_exe=/usr/bin/mysqldump
 mysql_exe=/usr/bin/mysql
 S3_BUCKET="${S3_BUCKET%/}"
+LOCAL_RETENTION_DAYS="${LOCAL_RETENTION_DAYS:-3}"
 
 backup_one() {
     local ID="$1"
@@ -117,8 +121,7 @@ backup_one() {
     log "Uploading $DB_NAME-$TIMESTAMP.tar.gz to S3..."
     if aws s3 cp "$LOCAL_BACKUP_DIR/$DB_NAME/$DB_NAME-$TIMESTAMP.tar.gz" \
         "$S3_BUCKET/$S3_DEST_NAME/DB_backup/$DB_NAME-$TIMESTAMP.tar.gz"; then
-        log "Upload successful for $DB_NAME."
-        rm -f "$LOCAL_BACKUP_DIR/$DB_NAME/$DB_NAME-$TIMESTAMP.tar.gz"
+        log "Upload successful for $DB_NAME. Keeping local copy for $LOCAL_RETENTION_DAYS days."
     else
         log "Error uploading $DB_NAME. Keeping local file for retry on next run."
     fi
@@ -128,8 +131,9 @@ backup_one() {
         -e "call sp_util_LogBackup('$DB_NAME','s3','$S3_BUCKET/$S3_DEST_NAME/DB_backup/','$DB_NAME-$TIMESTAMP.tar.gz','0','$(date '+%Y-%m-%d %H:%M:%S')');" \
         2>>"$LOG_FILE"
 
-    # safety net for anything that repeatedly failed to upload
-    find "$LOCAL_BACKUP_DIR/$DB_NAME" -mindepth 1 -mtime +2 \( -type f -o -type d \) -exec rm -rf -- {} +
+    # Local retention: keep the last LOCAL_RETENTION_DAYS days on the backup
+    # server as a quick restore copy (already uploaded to S3 regardless).
+    find "$LOCAL_BACKUP_DIR/$DB_NAME" -mindepth 1 -mtime "+${LOCAL_RETENTION_DAYS}" \( -type f -o -type d \) -exec rm -rf -- {} +
 }
 
 log "Starting DB backup+upload run using config: $CONFIG_FILE"

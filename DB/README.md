@@ -1,7 +1,8 @@
 # DB 備份 (RDS mysqldump + Upload)
 
 從 RDS (`hrmax001`、`hrmax003`) 對每間公司的 schema 跑 `mysqldump`，壓縮後**立刻上傳 S3**，
-成功後清掉本地檔案。
+本地備份檔保留 3 天(`LOCAL_RETENTION_DAYS`，預設 3)當作快速還原用的副本，過期才清掉，
+不是上傳成功就立刻刪(跟 AP 端做法一致)。
 
 ## ⚠️ 重要：`1_run_db_backup_and_upload.sh` 是重建版，部署前要驗證
 
@@ -19,8 +20,8 @@
 ## 檔案
 
 | 檔案 | 用途 |
-|---|---|
-| `1_run_db_backup_and_upload.sh` | 讀一個 config，逐間公司 dump→壓縮→上傳→清本地 |
+| --- | --- |
+| `1_run_db_backup_and_upload.sh` | 讀一個 config，逐間公司 dump→壓縮→上傳→本地保留 3 天 |
 | `configs/hrmax001.conf` | hrmax001 的公司清單 (ID → slug-統編 對應) |
 | `configs/hrmax003.conf` | hrmax003 的公司清單 |
 | `crontab_example.txt` | crontab 設定範例 |
@@ -28,7 +29,7 @@
 
 ## 用法
 
-```
+```bash
 DB_PASSWORD='...' ./1_run_db_backup_and_upload.sh configs/hrmax001.conf
 ```
 
@@ -49,8 +50,9 @@ DB_PASSWORD='...' ./1_run_db_backup_and_upload.sh configs/hrmax001.conf
 - 舊版是兩段式：`104DB_backup_rds_hrmax00X.sh` 只負責 dump 到本地
   `/mnt/rds_hrmax00X_backup/`，上傳是另外一份手動維護、逐行 `aws s3 sync` 的清單檔
   (`BackUp/hrmax003`，且 hrmax001 從沒有對應的清單檔)，執行時機也跟 dump 分開。
-- 新版把 dump→壓縮→上傳→清本地 合併進同一支腳本、同一次迴圈，不再需要另外維護一份
-  上傳清單，也不會讓 dump 出來的檔案在本地等一段時間才被上傳。
+- 新版把 dump→壓縮→上傳 合併進同一支腳本、同一次迴圈，不再需要另外維護一份上傳清單，
+  也不會讓 dump 出來的檔案在本地等一段時間才被上傳。上傳後本地備份檔一樣保留 3 天
+  (`LOCAL_RETENTION_DAYS`)當作快速還原副本，超過天數才由排程清掉。
 - `BackUp/` 裡的 `104DB_backup_DB001.sh` / `DB002.sh` / `DB003.sh`
   (含 `_import` 版本) 是本機 MariaDB(非 RDS)時代的版本，判斷已不是目前架構在用，
   沒有搬進這個 repo；如果 DB001/002/003 這幾台機器還在運作中，需要另外確認是否仍要保留。
