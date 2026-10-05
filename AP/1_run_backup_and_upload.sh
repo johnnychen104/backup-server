@@ -153,7 +153,8 @@ for ID in "${IDS[@]}"; do
     # server as a quick restore copy (already uploaded to S3 regardless).
     # 本地保留：不論上傳成功與否，本地檔案都留著，
     # 只清掉超過 LOCAL_RETENTION_DAYS 天的舊檔(已經上傳過的快速還原副本、或反覆上傳失敗的殘留檔)。
-    find "$LOCAL_BACKUP_DIR/$BACKUP_NAME" -name "*.tar.gz" -mtime "+${LOCAL_RETENTION_DAYS}" -delete
+    # find -mtime 會捨去小數，+N 實際會留 N+1 份，所以用 N-1 才是「含今天共 N 份」。
+    find "$LOCAL_BACKUP_DIR/$BACKUP_NAME" -name "*.tar.gz" -mtime "+$(( LOCAL_RETENTION_DAYS - 1 ))" -delete
 
     echo "----------------------------------------" >> "$LOG_FILE"
 done

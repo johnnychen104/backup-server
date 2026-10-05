@@ -141,7 +141,8 @@ fi
 
 # 4. Local retention: keep the last ${LOCAL_RETENTION_DAYS:-3} days on the
 #    backup server as a quick restore copy (already uploaded to S3 either way).
-find "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}" -type f -name "*.tar.gz" -mtime +${LOCAL_RETENTION_DAYS:-3} -delete
+#    find -mtime 會捨去小數，+N 實際會留 N+1 份，所以用 N-1 才是「含今天共 N 份」。
+find "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}" -type f -name "*.tar.gz" -mtime +$(( ${LOCAL_RETENTION_DAYS:-3} - 1 )) -delete
 find "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}" -mindepth 1 -maxdepth 1 -type d -mtime +1 -exec rm -rf {} +
 exit 0
 EOF
