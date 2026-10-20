@@ -1,5 +1,8 @@
 # DB 備份 (RDS mysqldump + Upload)
 
+> **⚠️ 2026-10-20 更新：本目錄的 `1_run_db_backup_and_upload.sh` 與 `configs/` 已過時，不要部署。**
+> 線上實際架構、變更紀錄與新客戶上線步驟見 [CHANGELOG.md](CHANGELOG.md)。
+
 從 RDS (`hrmax001`、`hrmax003`) 對每間公司的 schema 跑 `mysqldump`，壓縮後**立刻上傳 S3**，
 本地備份檔保留 3 天(`LOCAL_RETENTION_DAYS`，預設 3)當作快速還原用的副本，過期才清掉，
 不是上傳成功就立刻刪(跟 AP 端做法一致)。
