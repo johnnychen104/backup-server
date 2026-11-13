@@ -19,6 +19,67 @@ if [ ! -d "$CONFIG_DIR" ]; then
     exit 1
 fi
 
+# -----------------------------------------------------------------
+# 0. S3 客戶資料夾標記
+#    DB 備份腳本(104DB_backup_rds_hrmax00X.sh)靠「bucket 最上層已有 *-<統編>/ 資料夾」
+#    決定上傳位置。新客戶在 AP 第一次備份前 bucket 還沒有資料夾，DB 備份(03:00)會
+#    比 AP 備份(04:00 起)先跑而 FAIL，所以安裝(跑本產生器)時就先建好 0 byte 標記
+#    <英文簡稱>-<統編>/ ，DB 備份就不需要再維護 ehrms2_backup_rds_s3_map.txt。
+#    - bucket 已有同統編的資料夾 → 不建(避免出現兩個同統編資料夾，DB 備份會 FAIL)
+#    - 沒有英文簡稱的項目 → 略過並警告
+#    - 失敗只警告，不中斷 wrapper 產生
+#    用法：./2_generate_wrappers.sh            建標記並產生 wrapper
+#          ./2_generate_wrappers.sh --dry-run  只預覽會建哪些標記，不建、也不產生 wrapper
+# -----------------------------------------------------------------
+DRY_RUN=0
+[ "${1:-}" = "--dry-run" ] && DRY_RUN=1
+
+ensure_s3_markers() {
+    local pairs B ID CUST MATCH LISTING="" LISTED_BUCKET="" CREATED=0 EXISTS=0 SKIPPED=0
+    pairs=$(for CF in "$CONFIG_DIR"/*.conf; do
+        [ -e "$CF" ] || continue
+        ( source "$CF"; for ID in "${IDS[@]}"; do echo "${S3_BUCKET%/} $ID"; done )
+    done)
+    [ -n "$pairs" ] || return 0
+
+    while read -r B ID; do
+        [ -n "$ID" ] || continue
+        if [[ "$ID" != *-* ]]; then
+            echo "  [S3 marker] WARN 沒有英文簡稱，略過：${ID}（請確認 S3 資料夾名稱）"; SKIPPED=$((SKIPPED+1)); continue
+        fi
+        if [ "$B" != "$LISTED_BUCKET" ]; then
+            if ! LISTING=$(aws s3 ls "$B/" 2>/dev/null | awk '{print $2}'); then
+                echo "  [S3 marker] WARN 無法列出 $B，略過所有標記建立"; return 0
+            fi
+            LISTED_BUCKET="$B"
+        fi
+        CUST="${ID##*-}"
+        MATCH=$(printf '%s\n' "$LISTING" | grep -E -- "-${CUST}/$" || true)
+        if [ -n "$MATCH" ]; then
+            EXISTS=$((EXISTS+1))
+            [ "$MATCH" = "${ID}/" ] || echo "  [S3 marker] WARN bucket 已有 ${MATCH}，與 config 的 ${ID} 不同，不建標記"
+            continue
+        fi
+        if [ "$DRY_RUN" -eq 1 ]; then
+            echo "  [S3 marker] DRY-RUN 會建立：${B}/${ID}/"; CREATED=$((CREATED+1)); continue
+        fi
+        if aws s3api put-object --bucket "${B#s3://}" --key "${ID}/" >/dev/null 2>&1; then
+            echo "  [S3 marker] 已建立：${B}/${ID}/"; CREATED=$((CREATED+1))
+            LISTING="${LISTING}"$'\n'"${ID}/"
+        else
+            echo "  [S3 marker] WARN 建立失敗：${B}/${ID}/（不影響 wrapper 產生；DB 備份可能 FAIL，請手動處理）"
+        fi
+    done <<< "$pairs"
+    echo "  [S3 marker] 已存在 ${EXISTS}、$([ "$DRY_RUN" -eq 1 ] && echo 預計建立 || echo 已建立) ${CREATED}、略過 ${SKIPPED}"
+}
+
+echo "Checking S3 customer folder markers..."
+ensure_s3_markers
+if [ "$DRY_RUN" -eq 1 ]; then
+    echo "Dry-run: 未產生任何 wrapper。"
+    exit 0
+fi
+
 echo "Starting Wrapper Generation..."
 
 for CONFIG_FILE in "$CONFIG_DIR"/*.conf; do
@@ -121,19 +182,19 @@ rsync -az -e "\$SSH_CMD" "\${REMOTE_USER}@\${AP_HOST}:\${REMOTE_BASE_DIR}/\${FOL
 # 失敗只記警告、不中斷整支備份
 rsync -az -e "\$SSH_CMD" "\${REMOTE_USER}@\${AP_HOST}:\${REMOTE_BASE_DIR}/\${FOLDER_NAME}/packages/@104ha/open-api-server/logs/" "\$TARGET_DIR/logs_openapi/" || echo "[Wrapper] Warning: Rsync failed (logs_openapi), continuing anyway."
 
-# 2. Compress
+# 2. Compress（zstd -3 單執行緒；2026-11-13 實測比 gzip -6 省 56% 時間、壓縮階段 CPU 約 51% → 20%）
 cd "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}"
-tar -czf "\${TIMESTAMP}.tar.gz" "\${TIMESTAMP}" --remove-files
+tar -I 'zstd -3 -T1' -cf "\${TIMESTAMP}.tar.zst" "\${TIMESTAMP}" --remove-files
 
 if [ \$? -ne 0 ]; then
     echo "[Wrapper] Error: Compression failed."
     exit 1
 fi
-echo "[Wrapper] Backup Success: \${TIMESTAMP}.tar.gz"
+echo "[Wrapper] Backup Success: \${TIMESTAMP}.tar.zst"
 
 # 3. Upload immediately (no separate sync stage / staging folder)
-echo "[Wrapper] Uploading \${TIMESTAMP}.tar.gz to S3..."
-if aws s3 cp "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}/\${TIMESTAMP}.tar.gz" "\${S3_BUCKET}/\${S3_DEST_NAME}/AP_Backup/\${TIMESTAMP}.tar.gz"; then
+echo "[Wrapper] Uploading \${TIMESTAMP}.tar.zst to S3..."
+if aws s3 cp "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}/\${TIMESTAMP}.tar.zst" "\${S3_BUCKET}/\${S3_DEST_NAME}/AP_Backup/\${TIMESTAMP}.tar.zst"; then
     echo "[Wrapper] S3 Upload Success. Keeping local copy for ${LOCAL_RETENTION_DAYS:-3} days."
 else
     echo "[Wrapper] Error: S3 Upload failed. Keeping local file for retry on next run."
@@ -142,7 +203,9 @@ fi
 # 4. Local retention: keep the last ${LOCAL_RETENTION_DAYS:-3} days on the
 #    backup server as a quick restore copy (already uploaded to S3 either way).
 #    find -mtime 會捨去小數，+N 實際會留 N+1 份，所以用 N-1 才是「含今天共 N 份」。
+#    切換 zstd 期間 .tar.gz 與 .tar.zst 並存，兩種都清；舊 .tar.gz 全部過期後可拿掉第一行。
 find "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}" -type f -name "*.tar.gz" -mtime +$(( ${LOCAL_RETENTION_DAYS:-3} - 1 )) -delete
+find "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}" -type f -name "*.tar.zst" -mtime +$(( ${LOCAL_RETENTION_DAYS:-3} - 1 )) -delete
 find "\${LOCAL_BACKUP_DIR}/\${BACKUP_NAME}" -mindepth 1 -maxdepth 1 -type d -mtime +1 -exec rm -rf {} +
 exit 0
 EOF
