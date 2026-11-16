@@ -1,0 +1,32 @@
+# =================================================================
+# Config File for AP004
+# =================================================================
+
+# AP Server Connection Details
+AP_HOST="193.168.8.31"
+REMOTE_USER="ubuntu"
+REMOTE_BASE_DIR="/home/ubuntu"
+SSH_KEY_PATH="/home/ubuntu/johnny.pem"
+
+# Backup Server Local Settings
+# 每個 AP 對應一個外掛磁碟掛載點
+LOCAL_BACKUP_DIR="/mnt/AP001_backup"
+
+# S3 Settings
+S3_BUCKET="s3://hrmax-backup-singapore/"
+
+# List of Company IDs on this AP Server
+IDS=(
+"cotek-22092003"
+"farglorydome-27946233"
+"farglorygroup-86687839"
+"synergy-85092803"
+"digitimes-16300799"
+"artisticdc-90451259"
+"matatakitoyo-86673954"
+"brightesttech-54974676"
+"bailichu-16989733"
+"jesper-83561007"
+"cwco-35882520"
+"dengyi-16218320"
+)
